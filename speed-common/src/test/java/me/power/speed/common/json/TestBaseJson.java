@@ -11,10 +11,9 @@ import org.junit.Test;
 
 import com.alisoft.nano.bench.Nano;
 
+//https://code.google.com/p/nanobench/source/checkout
+
 public class TestBaseJson extends AbstractJson {
-	 private static int measurements = 100;//测量次数
-	 private static int threads = 10;//线程数
-	 private static int SerialTimes = 10000;//每个线程执行序列化次数
 	 
 	 @Before
 	 public void before() {
