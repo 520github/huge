@@ -15,7 +15,7 @@ import me.power.speed.common.stream.file.FileHandleAndFilter;
 import me.power.speed.common.stream.file.FileUtil;
 //http://wgslucky.blog.163.com/blog/static/97562532201332324639689/
 public class TestParseRequestHeaderLog extends AbstractBaseTest {
-	private String rootFilePath = "F:\\data\\df\\thread\\datafilter\\";
+	private String rootFilePath = "F:\\data\\df\\thread\\header\\";
 	private String filePath;
 	private String pattern;
 	
@@ -31,7 +31,7 @@ public class TestParseRequestHeaderLog extends AbstractBaseTest {
 	
 	@Before
 	public void before() {
-		this.filePath = rootFilePath+ "reqHeaderLog-1010321058081.log.2014-08-14";
+		this.filePath = rootFilePath+ "headeraa";
 		//this.filePath = rootFilePath+ "header.log";
 		this.pattern = "\\[[-/\\w\\.\\,]+\\]:\\[[-/\\w\\.\\,]+\\];";
 		headerKeyValueMap = new HashMap<String, List<String>>();
@@ -45,12 +45,7 @@ public class TestParseRequestHeaderLog extends AbstractBaseTest {
 			FileUtil.readLineDataFromFile(filePath, 50, new FileHandleAndFilter() {
 				@Override
 				public void handleOneLineData(String data) {
-//					System.out.println(data);
-//					try {
-//						FileUtil.appendWrite2File(rootFilePath + "header.log", data);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
+					//writeData2File(data);
 					handleOneData(data);
 				}
 				
@@ -67,18 +62,30 @@ public class TestParseRequestHeaderLog extends AbstractBaseTest {
 		}
 	}
 	
+	protected void writeData2File(String data) {
+		try {
+			System.out.println(data);
+			FileUtil.appendWrite2File(rootFilePath + "header.log", data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void printGoalResult() {
+		String filePath = rootFilePath + "goal.log";
 		for(Goal goal : goalMap.keySet()) {
 			long value = goalMap.get(goal);
-			System.out.println(goal + ":" + value);
+			//System.out.println(goal + ":" + value);
+			this.write2File(filePath, goal + ":" + value);
 		}
 	}
 	
 	private void printHeaderKeyValueResult() {
 		String filePath = rootFilePath + "result.log";
+		System.out.println("headerKeySize:" + headerKeyValueMap.size());
 		for(String key : headerKeyValueMap.keySet()) {
 			List<String> values = headerKeyValueMap.get(key);
-			System.out.println(key);
+			System.out.println("["+key+"]:[" + values.get(0) + "]");
 			this.write2File(filePath, key + " of value size:" + values.size());
 			
 			StringBuffer vls = new StringBuffer();
@@ -86,14 +93,6 @@ public class TestParseRequestHeaderLog extends AbstractBaseTest {
 				vls.append(value + ",");
 			}
 			this.write2File(filePath, vls.toString());
-		}
-	}
-	
-	private void write2File(String filePath, String message) {
-		try {
-			FileUtil.appendWrite2File(filePath, message);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -154,7 +153,6 @@ public class TestParseRequestHeaderLog extends AbstractBaseTest {
 			values.add(value);
 			headerKeyValueMap.put(key, values);
 		}
-		//System.out.println(key+"||"+value);
 	}
 	
 	//[X-Real-IP]:[219.133.15.229];

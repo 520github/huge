@@ -3,6 +3,7 @@ package me.power.speed;
 import org.junit.Assert;
 
 import me.power.speed.common.json.JacksonJsonUtil;
+import me.power.speed.common.stream.file.FileUtil;
 
 public class AbstractBaseTest {
 	protected void print(Object obj) {
@@ -21,5 +22,17 @@ public class AbstractBaseTest {
 	protected void fail(Exception e) {
 		e.printStackTrace();
 		Assert.fail(e.getMessage());
+	}
+	
+	protected String getCurrentEncode() {
+		return System.getProperty("file.encoding");
+	}
+	
+	protected void write2File(String filePath, String message) {
+		try {
+			FileUtil.appendWrite2File(filePath, message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
