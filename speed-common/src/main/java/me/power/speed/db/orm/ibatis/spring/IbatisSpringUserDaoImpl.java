@@ -33,5 +33,9 @@ public class IbatisSpringUserDaoImpl extends BaseIbatisSpringDao implements User
 			};
 		});
 	}
+	
+	public void batchInsertUserByIbatisSql(List<User> userList) {
+		this.getSqlMapClientTemplate().insert("batchInsertUser", userList);
+	}
 
 }

@@ -18,6 +18,23 @@
 	    #lastModifyTime#
 	    )
 	</insert>
+	
+	
+	<insert id="batchInsertUser" parameterClass="java.util.List">
+	    insert into user
+	    (userName,password,email,createTime,lastModifyTime)
+	    values 
+	    <iterate  conjunction ="," > 
+	        (
+	         #userName#,
+	         #password#,
+	         #email#,
+	         #createTime#,
+	         #lastModifyTime#
+	        )
+	    </iterate > 
+	    
+	</insert>
 
 
 </sqlMap>

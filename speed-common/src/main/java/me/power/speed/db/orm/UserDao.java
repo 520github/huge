@@ -9,4 +9,6 @@ public interface UserDao {
 	public void insertUser(User user);
 	
 	public void batchInsertUser(List<User> userList);
+	
+	public void batchInsertUserByIbatisSql(List<User> userList);
 }
