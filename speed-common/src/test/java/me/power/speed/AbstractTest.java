@@ -1,6 +1,3 @@
-/**
- * 
- */
 package me.power.speed;
 
 import org.junit.runner.RunWith;

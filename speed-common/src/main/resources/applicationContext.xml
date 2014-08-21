@@ -24,9 +24,39 @@
         <property name="host" value="localhost" />
         <property name="port" value="27017" />
     </bean>
+    
+    <bean id="mysql01DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="properties">
+			<props>
+				<prop key="c3p0.minPoolSize">1</prop>
+				<prop key="hc3p0.maxPoolSize">10</prop>
+				<prop key="hc3p0.timeout">60</prop>
+				<prop key="c3p0.max_statement">50</prop>
+				<prop key="c3p0.testConnectionOnCheckout">true</prop>
+				<prop key="hibernate.c3p0.testConnectionOnCheckout">false</prop>
+				<prop key="user">root</prop>
+				<prop key="password"></prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:mapping/MysqlSQLMappconfig.xml</value>
+		</property>
+		<property name="dataSource"> 
+            <ref bean="mysql01DataSource"/> 
+        </property> 
+	</bean>
 	
 	 
-	<context:component-scan
-		base-package="me.power.speed.db" />
+	<context:component-scan base-package="me.power.speed.db" />
+		
+	<!-- enable autowire -->
+	<context:annotation-config />
     
 </beans>
