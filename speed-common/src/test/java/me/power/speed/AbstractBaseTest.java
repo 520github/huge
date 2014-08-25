@@ -35,4 +35,12 @@ public class AbstractBaseTest {
 			e.printStackTrace();
 		}
 	}
+	
+	protected void sleep(long time) {
+		try {
+			Thread.sleep(time);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
