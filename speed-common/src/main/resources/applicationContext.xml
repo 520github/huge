@@ -12,7 +12,7 @@
 	<!--  
 	<aop:aspectj-autoproxy />
 	-->
-	
+	<bean id="springContext" class="me.power.speed.common.spring.SpringContext"/>
 	
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongo" ref="mongo" />

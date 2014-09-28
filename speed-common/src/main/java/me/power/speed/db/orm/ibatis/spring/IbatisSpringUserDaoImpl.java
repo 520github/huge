@@ -18,9 +18,10 @@ public class IbatisSpringUserDaoImpl extends BaseIbatisSpringDao implements User
 		this.getSqlMapClientTemplate().insert("insertUser", user);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void batchInsertUser(final List<User> userList) {
-		this.getSqlMapClientTemplate().execute(new SqlMapClientCallback<Object>() {
+		this.getSqlMapClientTemplate().execute(new SqlMapClientCallback() {
 			public Object doInSqlMapClient(SqlMapExecutor executor) throws java.sql.SQLException {
 				executor.startBatch();
 				

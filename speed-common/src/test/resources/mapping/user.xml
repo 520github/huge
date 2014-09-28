@@ -26,11 +26,11 @@
 	    values 
 	    <iterate  conjunction ="," > 
 	        (
-	         #userName#,
-	         #password#,
-	         #email#,
-	         #createTime#,
-	         #lastModifyTime#
+	         #list[].userName#,
+	         #list[].password#,
+	         #list[].email#,
+	         #list[].createTime#,
+	         #list[].lastModifyTime#
 	        )
 	    </iterate > 
 	    
