@@ -18,6 +18,20 @@ import java.util.List;
 public class FileUtil {
 	public static String FILE_ENCODE = "utf-8";
 	
+	/**
+	 * 读取第一行数据
+	 * @param filePath
+	 * @return
+	 * @throws Exception
+	 */
+	public static String readFirstLineDataFromFile(String filePath) throws Exception {
+		List<String> dataList = readLineDataFromFile(filePath);
+		if(dataList == null || dataList.size() < 1) {
+			return null;
+		}
+		return dataList.get(0);
+	}
+	
 	public static List<String> readLineDataFromFile(String filePath) throws Exception {
 		return readLineDataFromFile(filePath, 0);
 	}
