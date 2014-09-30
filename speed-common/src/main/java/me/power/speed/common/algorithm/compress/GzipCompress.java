@@ -32,7 +32,7 @@ public class GzipCompress extends AbstractCompress {
 			gzipStream.write(content.getBytes());
 			
 			this.closeOutputStream(gzipStream);
-			this.closeOutputStream(byteStream);
+			//this.closeOutputStream(byteStream);
 			
 			result = byteStream.toByteArray();
 		} catch (Exception e) {

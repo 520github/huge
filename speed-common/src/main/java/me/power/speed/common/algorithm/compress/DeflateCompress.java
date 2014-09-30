@@ -30,11 +30,16 @@ public class DeflateCompress extends AbstractCompress {
 		try {
 			byteStream = new ByteArrayOutputStream();
 			deflaterStream = new DeflaterOutputStream(byteStream,new Deflater(9, true));
+			
+			this.closeOutputStream(deflaterStream);
+			this.closeOutputStream(byteStream);
+			
+			result = byteStream.toByteArray();
 		} catch (Exception e) {
 			throw new CompressException(e);
 		}finally {
-			this.closeOutputStream(deflaterStream);
-			this.closeOutputStream(byteStream);
+			//this.closeOutputStream(deflaterStream);
+			//this.closeOutputStream(byteStream);
 		}
 		return result;
 	}
