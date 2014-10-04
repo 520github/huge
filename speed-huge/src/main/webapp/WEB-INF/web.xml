@@ -17,11 +17,22 @@
 	</servlet>
 	
 	<servlet>
+        <servlet-name>readStream</servlet-name>
+        <servlet-class>me.power.speed.huge.servlet.ReadStreamServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+	    <servlet-name>readStream</servlet-name>
+	    <url-pattern>/huge/read/stream</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
         <servlet-name>Resteasy</servlet-name>
         <servlet-class>
             org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
         </servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>Resteasy</servlet-name>
         <url-pattern>/huge/*</url-pattern>
