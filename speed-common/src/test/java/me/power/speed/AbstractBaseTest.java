@@ -43,4 +43,13 @@ public class AbstractBaseTest {
 			e.printStackTrace();
 		}
 	}
+	
+	protected String readFileFirstLineData(String filePath) {
+		try {
+			return FileUtil.readFirstLineDataFromFile(filePath);
+		} catch (Exception e) {
+			this.fail(e);
+		}
+		return null;
+	}
 }
