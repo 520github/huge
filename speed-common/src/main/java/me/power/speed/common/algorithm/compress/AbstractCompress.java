@@ -5,6 +5,8 @@ package me.power.speed.common.algorithm.compress;
 
 import java.io.OutputStream;
 
+import me.power.speed.common.stream.StreamUtil;
+
 /**
  * 压缩算法抽象类型
  * @author xuehui.miao
@@ -22,14 +24,7 @@ public abstract class AbstractCompress implements Compress {
 	}
 	
 	protected void closeOutputStream(OutputStream outStream) {
-		if(outStream == null) {
-			return;
-		}
-		try {
-			outStream.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		StreamUtil.closeOutputStream(outStream);
 	}
 
 }

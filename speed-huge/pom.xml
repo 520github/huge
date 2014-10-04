@@ -121,7 +121,12 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		
-	</dependencies>
+
+		<dependency>
+			<groupId>me.power.speed</groupId>
+			<artifactId>speed-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  </dependencies>
   
 </project>
