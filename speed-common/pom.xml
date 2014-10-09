@@ -226,5 +226,15 @@
 		<version>2.3</version>
 		<classifier>jdk15</classifier>
 	</dependency>
+	<dependency>
+		<groupId>com.esotericsoftware.kryo</groupId>
+		<artifactId>kryo</artifactId>
+		<version>2.17</version>
+	</dependency>
+	<dependency>
+	    <groupId>de.ruedigermoeller</groupId>
+	    <artifactId>fst</artifactId>
+	    <version>1.58</version>
+	</dependency>
   </dependencies>
 </project>
