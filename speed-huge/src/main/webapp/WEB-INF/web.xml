@@ -23,7 +23,17 @@
     
     <servlet-mapping>
 	    <servlet-name>readStream</servlet-name>
-	    <url-pattern>/huge/read/stream</url-pattern>
+	    <url-pattern>/huge/servlet/read/stream</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>threadStackTrace</servlet-name>
+        <servlet-class>me.power.speed.huge.servlet.ThreadStackTraceServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+	    <servlet-name>threadStackTrace</servlet-name>
+	    <url-pattern>/huge/servelt/thread/stacktrace</url-pattern>
     </servlet-mapping>
 	
 	<servlet>
