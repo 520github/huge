@@ -41,8 +41,10 @@ public class ReadStreamServlet extends HttpServlet {
 		}
 		
 		InputStream is = null;
+		int inputStreamLength = 0;
 		try {
 			is = req.getInputStream();
+			inputStreamLength = is.available();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -64,10 +66,12 @@ public class ReadStreamServlet extends HttpServlet {
 		}
 		
 		BufferedReader br = null;
+		String type = "unknow";
 		if(magic == GZIP_MAGIC) {
 			bis.mark(18);
 			try {
 				br = new BufferedReader(new InputStreamReader(new GZIPInputStream(bis)));
+				type = "gzip";
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -75,6 +79,7 @@ public class ReadStreamServlet extends HttpServlet {
 		else {
 			try {
 				br = new BufferedReader(new InputStreamReader(new InflaterInputStream(bis,new Inflater(true))));
+				type = "inflater";
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -87,6 +92,8 @@ public class ReadStreamServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		System.out.println("result:" + result);
+		
+		System.out.println("compressType:"+type+";contentLength:" + contentLength + ";inputStreamLength:" + inputStreamLength + ";after length:" + result.getBytes().length);
 	}
 	
 	private String getStringFromStream(BufferedReader br) {

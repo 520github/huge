@@ -13,4 +13,9 @@ public class CompressUtil {
 		Compress compress = new GzipCompress();
 		return compress.compressString(data);
 	}
+	
+	public static byte[] compressData2Deflate(String data) throws CompressException {
+		Compress compress = new DeflateCompress();
+		return compress.compressString(data);
+	}
 }
