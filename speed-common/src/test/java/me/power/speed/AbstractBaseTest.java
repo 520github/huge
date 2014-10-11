@@ -1,21 +1,43 @@
 package me.power.speed;
 
+import java.util.Date;
+
 import org.junit.Assert;
 
 import me.power.speed.common.json.JacksonJsonUtil;
 import me.power.speed.common.stream.file.FileUtil;
 
 public class AbstractBaseTest {
+	
+	protected Date getCurrentDate() {
+		return new Date();
+	}
+	
 	protected void print(Object obj) {
 		try {
 			if(obj == null) {
 				return;
 			}
+			
+			if(obj.getClass().isArray()) {
+				this.printArrayValue(obj);
+				return;
+			}
+			
 			String json = JacksonJsonUtil.convertObject2Json(obj);
 			System.out.println(json);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(obj.toString());
+		}
+	}
+	
+	protected void printArrayValue(Object obj) {
+		if(obj instanceof String[]) {
+			String values[] = (String[])obj;
+			for(String value : values) {
+				this.print(value);
+			}
 		}
 	}
 	

@@ -23,7 +23,10 @@ public class TestHttpclient extends AbstractBaseTest {
 		filePath = rootPath + "g3\\G3_old.log";
 		//filePath = rootPath + "big\\big_3_source.log";
 		//filePath = rootPath + "big\\big_3_remove_network.log";
-		filePath = rootPath + "big\\big_3_remove_network_g8.log";
+		//filePath = rootPath + "big\\big_3_remove_network_g8.log";
+		
+		filePath = rootPath + "big\\big_4_source.log";
+		filePath = rootPath + "big\\big_4_remove_network.log";
 	}
 	
 	@Test
