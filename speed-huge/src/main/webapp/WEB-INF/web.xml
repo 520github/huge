@@ -9,6 +9,16 @@
 		<param-value>classpath:applicationContext*.xml</param-value>
 	</context-param>
 	
+	<filter>
+		<filter-name>LocaleFilter</filter-name>
+		<filter-class>me.power.speed.huge.filter.LocaleFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>LocaleFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<!-- 系统初始化servlet -->
 	<servlet>
 		<servlet-name>systeminit</servlet-name>
