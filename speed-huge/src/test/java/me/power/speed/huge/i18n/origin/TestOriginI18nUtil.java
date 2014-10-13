@@ -11,6 +11,8 @@ import org.junit.Test;
  * @author xuehui.miao
  *
  */
+//http://blog.csdn.net/hanqunfeng/article/details/4879912
+//http://blog.csdn.net/wangpeng047/article/details/8994414
 public class TestOriginI18nUtil {
 	
 	@Test
