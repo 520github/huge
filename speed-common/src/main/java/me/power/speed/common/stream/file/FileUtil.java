@@ -6,10 +6,17 @@ package me.power.speed.common.stream.file;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 /**
  * @author xuehui.miao
@@ -98,6 +105,14 @@ public class FileUtil {
 				}
 			}
 		}
+	}
+	
+	public static void write2FileFromInputStream(String filePath, InputStream inputStream) throws FileNotFoundException, IOException {
+		IOUtils.copy(inputStream, new FileOutputStream(filePath));
+	}
+	
+	public static InputStream readInputStreamFromFile(String filePath) throws IOException {
+		return FileUtils.openInputStream(new File(filePath));
 	}
 	
 	public static BufferedReader getBufferedReader(String filePath, int mSize) throws Exception {

@@ -43,4 +43,15 @@ public class TestFileUtil extends AbstractBaseTest {
 			this.fail(e);
 		}
 	}
+	
+	@Test
+	public void testWrite2FileFromInputStream() {
+		try {
+			String writeFilePath = "F:\\data\\df\\event\\test.log";
+			String readFilePath = filePath;
+			FileUtil.write2FileFromInputStream(writeFilePath, FileUtil.readInputStreamFromFile(readFilePath));
+		} catch (Exception e) {
+			this.fail(e);
+		}
+	}
 }
