@@ -1,0 +1,30 @@
+<html>
+  <head>
+  	   <script type="text/javascript" src="/js/common/jquery-1.7.1.js"></script>
+  	   <script type="text/javascript" src="/js/common/ajaxfileupload.js"></script>
+  	   <script type="text/javascript">
+  	       $(document).ready(function(){
+  	       	    alert("ready go");
+  	       	    $("#uploadCert").change(function(){
+  	       	        alert("onchange");
+  	       	        uploadCert();
+  	       	    });
+  	       });
+  	       function uploadCert() {
+  	       	    console.log("upload cert.");
+  	       	    $.ajaxFileUpload({
+  	       	        url:'/huge/upload/file/formdata',
+  	       	        secureuri:false,
+  	       	        fileElementId:'uploadCert',
+  	       	        dataType: 'json',
+  	       	        success : function(data, status) {
+  	       	            console.log(data + ";" + status );
+  	       	        }
+  	       	    });
+  	       }
+  	   </script>
+  </head>
+  <body>
+  	   <input type="file" id="uploadCert" name = "uploadedFile">
+  </body>
+</html>

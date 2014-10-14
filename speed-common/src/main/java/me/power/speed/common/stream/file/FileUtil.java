@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +109,9 @@ public class FileUtil {
 	}
 	
 	public static void write2FileFromInputStream(String filePath, InputStream inputStream) throws FileNotFoundException, IOException {
-		IOUtils.copy(inputStream, new FileOutputStream(filePath));
+		OutputStream output = new FileOutputStream(filePath);
+		IOUtils.copy(inputStream, output);
+		output.close();
 	}
 	
 	public static InputStream readInputStreamFromFile(String filePath) throws IOException {

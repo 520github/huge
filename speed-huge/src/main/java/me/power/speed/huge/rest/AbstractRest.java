@@ -16,7 +16,7 @@ public abstract class AbstractRest {
 	protected static String mediaTypeJson = MediaType.APPLICATION_JSON;
 	
 	/**
-	 * 获取异常的Response信息
+	 * 锟斤拷取锟届常锟斤拷Response锟斤拷息
 	 * @param e
 	 * @return
 	 */
@@ -26,7 +26,7 @@ public abstract class AbstractRest {
 	}
 	
 	/**
-	 * 获取异常的Response信息
+	 * 锟斤拷取锟届常锟斤拷Response锟斤拷息
 	 * @param errorMsg
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public abstract class AbstractRest {
 	}
 	
 	/**
-	 * 处理异常
+	 * 锟斤拷锟斤拷锟届常
 	 * @param e
 	 * @return
 	 */
@@ -43,6 +43,7 @@ public abstract class AbstractRest {
 		if(e == null) {
 			return null;
 		}
+		e.printStackTrace();
 		String errorMsg = null;
 		if(e instanceof IllegalArgumentException) {
 			if(e.getMessage().indexOf("Source") > -1) {
@@ -88,5 +89,9 @@ public abstract class AbstractRest {
 			e.printStackTrace();
 		}
 		return value;
+	}
+	
+	protected void log(String message) {
+		System.out.println(message);
 	}
 }
