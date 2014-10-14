@@ -226,6 +226,31 @@
 		<version>2.3</version>
 		<classifier>jdk15</classifier>
 	</dependency>
+	
+	<dependency>
+  		<groupId>com.sun.jersey</groupId>
+  		<artifactId>jersey-client</artifactId>
+  		<version>1.17.1</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.jboss.resteasy</groupId>
+  		<artifactId>resteasy-jackson-provider</artifactId>
+  		<version>2.1.0.GA</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.jboss.resteasy</groupId>
+  		<artifactId>resteasy-jettison-provider</artifactId>
+  		<version>2.1.0.GA</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.codehaus.jackson</groupId>
+  		<artifactId>jackson-mapper-asl</artifactId>
+  		<version>1.6.3</version>
+  	</dependency>
+  	
 	<dependency>
 		<groupId>com.esotericsoftware.kryo</groupId>
 		<artifactId>kryo</artifactId>
