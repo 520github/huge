@@ -1,0 +1,72 @@
+<html>
+  <head>
+       <script type="text/javascript" src="/js/tool/underscore.js"></script>
+  	   <script type="text/javascript" src="/js/frame/backbone.js"></script>
+  	   <script type="text/javascript">
+  	       ModelTest = Backbone.Model.extend({
+  	           //默认属性
+  	           defaults : {
+  	              name:'df',
+  	              age:0,
+  	              sex:0,
+  	              children:["lumi"]
+  	           },
+  	           
+  	           //校验内容,非法值不会进行设置
+  	           validate: function(obj) {
+  	              if(obj.age >100 || obj.age < 0) {
+  	                  console.log("age is error.");
+  	                  return "age is error.";
+  	              }
+  	           },
+  	           
+  	           //初始化方法
+  	           initialize: function() {
+  	               console.log("welcome to this word");
+  	               //监听单个属性改变
+  	               this.bind("change:name", function(){
+  	                   //console.log("property change");
+  	                   //var name = this.get("name");
+  	                   //alert("name change:" + name);
+  	               });
+  	               //监听所有属性改变
+  	               this.bind("change",function(value){
+  	                  console.log("find propety change." + value);
+  	               });
+  	           },
+  	           setChildren: function(name) {
+  	               var ar = this.get("children");
+  	               ar.push(name);
+  	               this.set({children: ar});
+  	           }
+  	       });
+  	       
+  	       var test = new ModelTest();
+  	       
+  	       console.log(test.get("name"));
+  	       console.log(test.get("age"));
+  	       console.log(test.get("sex"));
+  	       
+  	       test = new ModelTest({name:"nini",age:288});
+  	       
+  	       console.log(test.get("name"));
+  	       console.log(test.get("age"));
+  	       console.log(test.get("sex"));
+  	       
+  	       test.set({name:"nainai", age:99, sex:1});
+  	       console.log(test.get("name"));
+  	       console.log(test.get("age"));
+  	       console.log(test.get("sex"));
+  	       
+  	       test.set({age:-5});
+  	       
+  	       test.setChildren("pmin");
+  	       console.log(test.get("children"));
+  	       
+  	       
+  	   </script>
+  </head>
+  <body>
+  	   <input type="file" id="uploadCert" name = "uploadedFile">
+  </body>
+</html>

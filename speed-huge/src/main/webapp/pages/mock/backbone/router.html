@@ -1,0 +1,52 @@
+<html>
+  <head>
+       <script type="text/javascript" src="/js/tool/underscore.js"></script>
+       <script type="text/javascript" src="/js/common/jquery-1.7.1.js"></script>
+  	   <script type="text/javascript" src="/js/frame/backbone.js"></script>
+  	   
+  	   <div id="view"/>
+  	   
+  	   <script type="text/template" id="search_template">
+           <label><%=searchLabel%></label>
+           <input type="text" id="search_input"/>
+           <input type="button" id="search_button" value="Search"/>
+       </script>
+       
+       //need load all page
+  	   <script type="text/javascript">
+  	       var AppRouter = Backbone.Router.extend({
+  	           routes: {
+  	               'post/:id':'postId',
+  	               'download/*path':'downloadFile',
+  	               'page/:module/:paras':'go2Page',
+  	               ':route/:action':'loadView',
+  	               'go2home':'home'
+  	           },
+  	           home: function(action) {
+  	               console.log("home:" + action);
+  	           },
+  	           loadView: function(route,action) {
+  	               console.log(route + "_" + action);
+  	           },
+  	           go2Page: function(module, paras) {
+  	               console.log("module:" + module);
+  	               console.log(paras);
+  	           },
+  	           postId: function(id) {
+  	               console.log("id:" + id);
+  	           },
+  	           downloadFile: function(path) {
+  	               console.log("path:" + path);
+  	           }
+  	       });
+  	       
+  	       var arouter = new AppRouter();
+  	       Backbone.history.start();
+  	       
+  	            
+  	   </script>
+  </head>
+  <body>
+  	   
+  </body>
+</html>

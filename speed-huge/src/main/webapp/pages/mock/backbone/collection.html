@@ -1,0 +1,43 @@
+<html>
+  <head>
+       <script type="text/javascript" src="/js/tool/underscore.js"></script>
+       <script type="text/javascript" src="/js/common/jquery-1.7.1.js"></script>
+  	   <script type="text/javascript" src="/js/frame/backbone.js"></script>
+  	   
+  	   <div id="view"/>
+  	   
+  	   <script type="text/template" id="search_template">
+           <label><%=searchLabel%></label>
+           <input type="text" id="search_input"/>
+           <input type="button" id="search_button" value="Search"/>
+       </script>
+       
+       //need load all page
+  	   <script type="text/javascript">
+  	       var ModelTest = Backbone.Model.extend({
+  	           defaults: {
+  	               firstName:'',
+  	               lastName:''
+  	           },
+  	           initinalize: function() {
+  	               console.log("this is model world.");
+  	           }
+  	       });
+  	       
+  	       var CollectionTest = Backbone.Collection.extend({
+  	           model: ModelTest
+  	       });
+  	       
+  	       var modelTest1 = new ModelTest({firstName:"myFirst",lastName:"myLast"});
+  	       var modelTest2 = new ModelTest({firstName:"youFirst",lastName:"youLast"});
+  	       
+  	       var collectionTest = new CollectionTest([modelTest1, modelTest2]);
+  	       
+  	       console.log(collectionTest.models);
+  	            
+  	   </script>
+  </head>
+  <body>
+  	   
+  </body>
+</html>
