@@ -24,6 +24,11 @@ public class AbstractBaseTest {
 				return;
 			}
 			
+			if(obj instanceof String) {
+				System.out.println(obj.toString());
+				return;
+			}
+			
 			String json = JacksonJsonUtil.convertObject2Json(obj);
 			System.out.println(json);
 		} catch (Exception e) {

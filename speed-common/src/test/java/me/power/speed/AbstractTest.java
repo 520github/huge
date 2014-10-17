@@ -1,6 +1,8 @@
 package me.power.speed;
 
 import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -11,8 +13,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/applicationContext.xml")
 public class AbstractTest extends AbstractBaseTest {
-	protected static int measurements = 100;//²âÁ¿´ÎÊý
-	protected static int threads = 10;//Ïß³ÌÊý
-	protected static int SerialTimes = 10000;//Ã¿¸öÏß³ÌÖ´ÐÐÐòÁÐ»¯´ÎÊý
+	protected static int measurements = 100;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	protected static int threads = 10;//ï¿½ß³ï¿½ï¿½ï¿½
+	protected static int SerialTimes = 10000;//Ã¿ï¿½ï¿½ï¿½ß³ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½
+	
+	public void getBean() {
+		ApplicationContextAware aa;
+	}
 	 
 }
