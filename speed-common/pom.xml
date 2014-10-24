@@ -193,19 +193,19 @@
 		<artifactId>nanobench</artifactId>
 		<version>1.0</version>
 		<scope>system</scope>
-		<systemPath>E:\10-project\800-speed\speed\speed-common\lib\nanobench.jar</systemPath>
+		<systemPath>${project.basedir}/lib/nanobench.jar</systemPath>
 	</dependency>
 
 	<dependency>
 		<groupId>org.codehaus.jackson</groupId>
 		<artifactId>jackson-core-asl</artifactId>
-		<version>1.3.0</version>
+		<version>1.6.3</version>
 	</dependency>
 	
 	<dependency>
 		<groupId>org.codehaus.jackson</groupId>
 		<artifactId>jackson-mapper-asl</artifactId>
-		<version>1.3.0</version>
+		<version>1.6.3</version>
 	</dependency>
 	
 	<dependency>
@@ -261,5 +261,12 @@
 	    <artifactId>fst</artifactId>
 	    <version>1.58</version>
 	</dependency>
+	
+	<dependency>
+		<groupId>com.tendcloud</groupId>
+		<artifactId>ip-location-client</artifactId>
+		<version>0.0.4</version>
+	</dependency>
+	
   </dependencies>
 </project>

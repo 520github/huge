@@ -1,10 +1,17 @@
 package me.power.speed;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 
+import com.tendcloud.iplocation.thrift.IpLocation;
+
 import me.power.speed.common.json.JacksonJsonUtil;
+import me.power.speed.common.location.ip.IpLocCltThreadLocal;
 import me.power.speed.common.stream.file.FileUtil;
 
 public class AbstractBaseTest {
@@ -78,5 +85,39 @@ public class AbstractBaseTest {
 			this.fail(e);
 		}
 		return null;
+	}
+	
+	protected String getTimeString(long time) {
+		Timestamp ts = new Timestamp(time);
+		return ts.toString();
+	}
+	
+	protected String getCurrentTimeFileName() {
+		return this.getTimestampString().replaceAll(" ", "-").replaceAll(":", "-");
+	}
+	
+	protected String getTimestampString() {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss SSS");
+		return df.format(new Timestamp(System.currentTimeMillis()));
+	}
+	
+	protected String getCountryCodeFromIp(String ip) {
+		if(StringUtils.isBlank(ip)) {
+			return "ip is empty";
+		}
+		IpLocation location = this.getLocationFromIp(ip);
+		if(location != null) {
+			return location.getCountry();
+		}
+		return "country is empty";
+	}
+	
+	protected IpLocation getLocationFromIp(String ip) {
+		try {
+			return IpLocCltThreadLocal.getClient().getLocationFromIp(ip);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new IpLocation("unknow", "unknow", "unknow");
 	}
 }
