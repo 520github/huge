@@ -17,11 +17,16 @@ import java.util.Enumeration;
 
 //http://blog.csdn.net/byg760/article/details/10228433
 //http://developer.51cto.com/art/200909/150930.htm
+//http://blog.csdn.net/jinzhu117/article/details/7958181
+//http://blog.csdn.net/x1135768777/article/details/17112485
+//http://blog.csdn.net/nogodoss/article/details/8209151
+//http://blog.csdn.net/linfei2707/article/details/22617973
+//http://www.360doc.com/content/14/0208/12/9200790_350679134.shtml
 
 public class ReadP12Cert {
 	public static void readP12Cert() {
-		final String KEYSTORE_FILE     = "证书路径";  
-        final String KEYSTORE_PASSWORD = "证书密码";  
+		final String KEYSTORE_FILE     = "C:\\xuehui\\40-information\\ios推送证书\\talkingdata.p12";  
+        final String KEYSTORE_PASSWORD = "wangying";  
         final String KEYSTORE_ALIAS    = "alias";
         
         try {
@@ -60,5 +65,9 @@ public class ReadP12Cert {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		readP12Cert();
 	}
 }
