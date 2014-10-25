@@ -268,5 +268,11 @@
 		<version>0.0.4</version>
 	</dependency>
 	
+	<dependency>
+		<groupId>org.apache.velocity</groupId>
+		<artifactId>velocity</artifactId>
+		<version>1.7</version>
+	</dependency>
+	
   </dependencies>
 </project>
