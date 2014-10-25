@@ -1,0 +1,38 @@
+<html >
+<head>
+    <script src="/js/frame/angular.js"></script>
+    <script src="/js/mock/angular/angular-tutorial-app.js"></script>
+    <script src="/js/mock/angular/angular-tutorial-controller.js"></script>
+</head>
+<body>
+    <div id="content" ng-app="TutorialApp" ng-controller="MainCntl">
+        {{understand}}
+        <br>
+        <input type="text" ng-model='inputValue' />
+        <br>
+        {{inputValue}}
+        <br>
+        
+        selectPerson:<select ng-model="selectedPerson" ng-options="obj.name for obj in people"></select>
+        <select ng-model="selectedGenre">
+            <option ng-repeat="label in people[selectedPerson.id].music"> {{label}} </option>
+        </select>
+        
+        <br>
+        
+        <input type="text" ng-model="searchText"/>
+        <ul>
+           <li ng-repeat="person in people | filter:searchText" ng-show="person.live == true">#{{person.id}} {{person.name}}</li>
+        </ul>
+        <br>
+        <ul>
+           <li ng-repeat="person in people | filter:searchText" ng-hide='person.live == false'>#{{person.id}} {{person.name}}</li>
+        </ul>
+        
+        <br>
+        <input type="text" ng-model="newPerson" />
+        <button ng-click="addNew()" >ADD</button>
+        
+	</div>
+</body>
+</html>

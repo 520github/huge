@@ -1,0 +1,13 @@
+<html >
+<head>
+    <script src="/js/frame/angular.js"></script>
+    <script src="/js/frame/angular-resource.js"></script>
+    <script src="/js/mock/angular/angular-rest-app-cntl.js"></script>
+</head>
+<body>
+    <div id="app" ng-app="restApp" ng-controller="appController">
+        <button ng-click="getUser()" >click</button>
+        {{queryUser.id}}
+	</div>
+</body>
+</html>
