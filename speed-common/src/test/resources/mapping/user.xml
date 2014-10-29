@@ -2,6 +2,18 @@
 <!DOCTYPE sqlMap
 	PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 
+CREATE TABLE `user` (
+	`userName` VARCHAR(50) NOT NULL,
+	`password` VARCHAR(50) NOT NULL,
+	`email` VARCHAR(50) NOT NULL,
+	`createTime` DATETIME NOT NULL,
+	`lastModifyTime` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`userName`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+ -->
 <sqlMap>
 	<typeAlias alias="user" type="me.power.speed.entity.User" />
 	

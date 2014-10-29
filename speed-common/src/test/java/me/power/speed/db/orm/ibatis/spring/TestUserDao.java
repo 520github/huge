@@ -1,6 +1,5 @@
 package me.power.speed.db.orm.ibatis.spring;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import me.power.speed.AbstractTest;
 import me.power.speed.ConsumerTime;
+import me.power.speed.common.util.DateUtil;
 import me.power.speed.db.orm.UserDao;
 import me.power.speed.entity.User;
 
@@ -21,18 +21,29 @@ public class TestUserDao extends AbstractTest {
 	@Before
 	public void before() {
 		user = new User();
-		user.setUserName("userName");
-		user.setPassword("password");
-		user.setEmail("email");
-		user.setCreateTime(System.currentTimeMillis());
-		user.setLastModifyTime(user.getCreateTime());
+		String index = "2";
+		user.setUserName("userName" + index);
+		user.setPassword("password" + index);
+		user.setEmail("email" + index);
+		user.setCreateTime(this.getCurrentDate());
+		user.setLastModifyTime(this.getCurrentTimestamp());
+	}
+	
+	@Test
+	public void testOneInsertUser() {
+		try {
+			user.setCreateTime(DateUtil.parseString2UTCDate("2014-10-28T03:34:40Z"));
+			userDao.insertUser(user);
+		} catch (Exception e) {
+			this.fail(e);
+		}
 	}
 	
 	@Test
 	public void testInsertUser() {
 		try {
 			ConsumerTime ct = new ConsumerTime();
-			for(int i = 0; i <100; i ++) {
+			for(int i = 0; i <1; i ++) {
 				userDao.insertUser(this.getUser(i));
 			}
 			ct.endConsumeTime();
@@ -112,8 +123,13 @@ public class TestUserDao extends AbstractTest {
 		user.setUserName("userName_" + i);
 		user.setPassword("password_"+i);
 		user.setEmail("email_"+i);
-		user.setCreateTime(System.currentTimeMillis());
-		user.setLastModifyTime(user.getCreateTime());
+		user.setCreateTime(this.getCurrentDate());
+		try {
+			user.setCreateTime(DateUtil.parseString2UTCDate("2014-10-28T03:34:40Z"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		user.setLastModifyTime(this.getCurrentTimestamp());
 		return user;
 	}
 }

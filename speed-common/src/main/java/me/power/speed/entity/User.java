@@ -1,11 +1,14 @@
 package me.power.speed.entity;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class User {
 	private String userName ;
 	private String password ;
 	private String email;
-	private long createTime;
-	private long lastModifyTime;
+	private Date createTime;
+	private Timestamp lastModifyTime;
 	
 	public String getUserName() {
 		return userName;
@@ -25,16 +28,28 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public long getCreateTime() {
+//	public long getCreateTime() {
+//		return createTime;
+//	}
+//	public void setCreateTime(long createTime) {
+//		this.createTime = createTime;
+//	}
+//	public long getLastModifyTime() {
+//		return lastModifyTime;
+//	}
+//	public void setLastModifyTime(long lastModifyTime) {
+//		this.lastModifyTime = lastModifyTime;
+//	}
+	public Date getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(long createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public long getLastModifyTime() {
+	public Timestamp getLastModifyTime() {
 		return lastModifyTime;
 	}
-	public void setLastModifyTime(long lastModifyTime) {
+	public void setLastModifyTime(Timestamp lastModifyTime) {
 		this.lastModifyTime = lastModifyTime;
 	}
 }

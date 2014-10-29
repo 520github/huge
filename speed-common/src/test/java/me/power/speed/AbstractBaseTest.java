@@ -20,6 +20,10 @@ public class AbstractBaseTest {
 		return new Date();
 	}
 	
+	protected Timestamp getCurrentTimestamp() {
+		return new Timestamp(System.currentTimeMillis());
+	}
+	
 	protected void print(Object obj) {
 		try {
 			if(obj == null) {
