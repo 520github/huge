@@ -1,0 +1,22 @@
+
+<%=obj.pushName%>
+<% _.each(obj.keys, function(key) {
+%>
+    <%=key%>: <input id="<%=obj.pushType%>_<%=key%>" name="<%=key%>" type="text" value="<%=this[key]%>" />
+<%
+},obj.values);
+%>
+<input type="button" bindId="<%=obj.bindId%>" value="<%=obj.buttonName%>" id="<%=obj.pushType%>" />
+<input type="button" bindId="<%=obj.bindId%>" value="删除" id="<%=obj.pushType%>_del" />
+是否校验通过：
+<% if(obj.isOk == true){
+%>
+  是
+<%
+}
+else {
+%>
+否
+<%
+}
+%>

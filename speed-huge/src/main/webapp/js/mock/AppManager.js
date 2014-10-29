@@ -1,7 +1,11 @@
 define(
-       ['/js/mock/view/TestView.js'],
+       [
+       '/js/mock/view/TestView.js',
+       '/js/mock/view/DynamicView.js'
+       ],
        function(
-           TestView
+           TestView,
+           DynamicView
        ){
            var appManager = {
                renderPage: function(page) {
@@ -9,6 +13,10 @@ define(
                        case 'test':
                            console.log("go to testView");
                            new TestView;
+                           break;
+                       case 'dynamic':
+                           console.log("go to dynamicView");
+                           new DynamicView;
                            break;
                    }
                }
