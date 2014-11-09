@@ -9,6 +9,11 @@
   <name>speed common</name>
   <description>this is speed common project</description>
   
+  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>3.1.1.RELEASE</spring.version>
+  </properties>
+  
   <repositories>
      <repository>
          <id>clojars.org</id>
@@ -42,26 +47,38 @@
   	<dependency>
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-test</artifactId>
-  		<version>3.0.5.RELEASE</version>
+  		<version>${spring.version}</version>
   	</dependency>
   	
   	<dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-orm</artifactId>
-		<version>3.0.5.RELEASE</version>
+		<version>${spring.version}</version>
 	</dependency>
 	
 	<dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-context-support</artifactId>
-		<version>3.0.5.RELEASE</version>
+		<version>${spring.version}</version>
 	</dependency>
 	
 	<dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-context</artifactId>
-		<version>3.0.5.RELEASE</version>
+		<version>${spring.version}</version>
 	</dependency>
+	
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjrt</artifactId>
+		<version>1.6.11</version>
+	</dependency>
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<version>1.6.11</version>
+	</dependency>
+	<!-- spring end -->
 	
 	<dependency>
 		<groupId>org.apache.ibatis</groupId>

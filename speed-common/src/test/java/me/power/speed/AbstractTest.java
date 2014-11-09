@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/applicationContext.xml")
+@ContextConfiguration("classpath:/applicationContext*.xml")
 public class AbstractTest extends AbstractBaseTest {
 	protected static int measurements = 100;//��������
 	protected static int threads = 10;//�߳���

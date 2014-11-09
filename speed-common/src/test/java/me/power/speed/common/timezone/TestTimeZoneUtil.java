@@ -30,9 +30,14 @@ public class TestTimeZoneUtil extends AbstractBaseTest {
 	
 	@Test
 	public void testGetTimeZoneRawOffset() {
-		int result = TimeZoneUtil.getTimeZoneRawOffset("");
+		int result = TimeZoneUtil.getTimeZoneRawOffset("Asia/Saigon");//Asia/Saigon 7
 		this.print(result);
 		this.change2hour(result);
+		
+		long currTime = System.currentTimeMillis();
+		currTime = Long.valueOf("1412939628534");
+		this.print(currTime);
+		this.print(currTime - result);
 	}
 	
 	@Test
@@ -47,7 +52,8 @@ public class TestTimeZoneUtil extends AbstractBaseTest {
 	
 	@Test
 	public void testGetDiffTimeZoneRawOffse() {
-		int result = TimeZoneUtil.getDiffTimeZoneRawOffse("Pacific/Kiritimati");
+		int result = TimeZoneUtil.getDiffTimeZoneRawOffse("Asia/Saigon");//Asia/Saigon 7;Pacific/Kiritimati
+		this.print(result);
 		this.change2hour(result);
 	}
 	
@@ -56,7 +62,11 @@ public class TestTimeZoneUtil extends AbstractBaseTest {
 		String firstTimeZoneId = TimeZoneUtil.getDefaultTimeZoneId();
 		String secordTimeZoneId = TimeZoneUtil.getDefaultTimeZoneId();
 		Date date = this.getCurrentDate();
+		date = new Date(Long.valueOf("1414858821000"));
 		this.print(date.toString());
+		
+		secordTimeZoneId = "Asia/Saigon";//7
+		this.getDateByTimeZone(date, firstTimeZoneId, secordTimeZoneId);
 		
 		secordTimeZoneId = "Indian/Cocos";//6
 		this.getDateByTimeZone(date, firstTimeZoneId, secordTimeZoneId);
@@ -86,6 +96,7 @@ public class TestTimeZoneUtil extends AbstractBaseTest {
 	
 	private void getDateByTimeZone(Date date, String firstTimeZoneId, String secordTimeZoneId) {
 		Date result = TimeZoneUtil.getDateByTimeZone(date, firstTimeZoneId, secordTimeZoneId);
+		this.print(result.getTime());
 		this.print(result.toString());
 	}
 	
