@@ -28,7 +28,7 @@
        <property name="cacheProviderFacade" ref="cacheProviderFacade" />
        <property name="cachingModels"> <!-- 进行cache缓存 -->
            <props> <!-- 所有StudentService对象中，以get开头的方法都将进行缓存 -->
-               <prop key="SpringModuleCache.get*">cacheName=testCache</prop>
+               <prop key="me.power.speed.common.cache.spring.SpringModuleCache.get*">cacheName=testCache</prop>
            </props>
        </property>
    </bean>
@@ -39,7 +39,7 @@
        <property name="cacheProviderFacade" ref="cacheProviderFacade" />
        <property name="flushingModels"><!-- 进行cache刷新(清除) -->
            <props>
-               <prop key="SpringModuleCache.set*">cacheNames=testCache</prop>
+               <prop key="me.power.speed.common.cache.spring.SpringModuleCache.set*">cacheNames=testCache</prop>
            </props>
        </property>
    </bean>

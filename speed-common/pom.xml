@@ -19,6 +19,13 @@
          <id>clojars.org</id>
          <url>http://clojars.org/repo</url>
      </repository>
+     <!-- 
+     <repository>
+        <id>sharca.com.repo</id>
+        <name>SharcaConsulting Repository</name>
+        <url>http://www.sharca.com/repository</url>
+     </repository>
+      -->
   </repositories>
   
   <dependencies>
@@ -296,5 +303,25 @@
 		<artifactId>mail</artifactId>
 		<version>1.4.4</version>
 	</dependency>
+	
+	<dependency>
+		<groupId>net.sf.ehcache</groupId>
+		<artifactId>ehcache</artifactId>
+		<version>1.6.2</version>
+	</dependency>
+	
+	<!--  
+	<dependency>
+	    <groupId>org.springmodules</groupId>
+	    <artifactId>spring-modules-cache</artifactId>
+	    <version>0.9</version>
+	</dependency>
+	-->
+	<dependency>
+		<groupId>org.springmodules</groupId>
+		<artifactId>spring-modules-cache</artifactId>
+		<version>0.8</version>
+	</dependency>
+	
   </dependencies>
 </project>
