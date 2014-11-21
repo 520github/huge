@@ -11,6 +11,11 @@ define(
                {
                  name:'deleteData',
                  url:'/huge/dynamic/delete'        
+               },
+               {
+                 name:'getUnConfigChannels',
+                 url:'/huge/dynamic/getUnConfigChannels',
+                 type:'get'
                }
            ];
            

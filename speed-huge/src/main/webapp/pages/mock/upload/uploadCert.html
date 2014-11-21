@@ -1,5 +1,6 @@
 <html>
   <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   	   <script type="text/javascript" src="/js/common/jquery-1.7.1.js"></script>
   	   <script type="text/javascript" src="/js/common/ajaxfileupload.js"></script>
   	   <script type="text/javascript">
@@ -25,6 +26,18 @@
   	   </script>
   </head>
   <body>
+       <!-- id必须定义在name的前面 -->
+       <input style="position:absolute;opacity:0;width:0px;" type="file" name="uploadedFile" id="uploadCert" bindId=""　data="Prod"  />
+       <a id="button" href="javascript:void(0)" class="btn btn-grey">上传</a>
+                    
+       <!--
   	   <input type="file" id="uploadCert" name = "uploadedFile">
+  	   
+  	   <input style="position:absolute;opacity:0;width:0px" type="file" name="uploadedFile" id="uploadCert" bindId=""　data="Prod" />
+       <a id="button" href="javascript:void(0)" class="btn btn-grey">上传</a>
+       
+       <input style="position:absolute;opacity:0;width:0px;" type="file" name="uploadedFile" id="uploadCert"  bindId=""　data="Prod"  />
+  	   -->
+  	   
   </body>
 </html>

@@ -1,0 +1,30 @@
+<html>  
+ <head>  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>添加附件</title>  
+ </head>  
+ <body class="body">  
+  <script type="text/javascript">  
+   function fclick(obj){  
+    obj.style.posTop=event.srcElement.offsetTop  
+     var x=event.x-obj.offsetWidth/2  
+     if(x<event.srcElement.offsetLeft)x=event.srcElement.offsetLeft  
+     if(x>event.srcElement.offsetLeft+event.srcElement.offsetWidth-obj.offsetWidth)x=event.srcElement.offsetLeft+event.srcElement.offsetWidth-obj.offsetWidth  
+     obj.style.posLeft=x  
+   }  
+  </script>  
+  <style>  
+   
+  </style>  
+  <form method="post" action="" enctype="multipart/form-data">  
+   <input id="f_file" type='text'>  
+   <input type="button" onmouseover="fclick(t_file)" value="选择上传文件">  
+   <input name="upload" type="file" style="position:relative;filter:alpha(opacity=0);width:0px;" id="t_file" onchange="f_file.value=this.value" hidefocus>  
+   <!-- opacity是透明度  这里写20是为了方便浏览，使用时应设置为0 -->  
+   <!--
+       <input type="submit" value="提交"> 
+   -->
+    
+  </form>  
+ </body>  
+</html>  

@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<TITLE>upload</TITLE>
+<style>
+<!--
+.addfileA{
+    position:relative;
+    cursor:hand;
+    text-decoration:none;
+    background-image: url('C:\WINDOWS\Zapotec.bmp');
+    width:20px;
+}
+ 
+.addfileI {
+    cursor:hand;
+    position:relative;
+    left:0px;
+    width:20px;
+    background-color: blue;
+    opacity:0;
+    filter:alpha(opacity=0)
+}
+-->
+</style>
+</HEAD>
+<BODY>
+<FORM METHOD=POST ACTION="http://localhost:8080/upload.jsp" enctype="multipart/form-data">
+<A hideFocus class=addfileA id=aComposeAttach href="#">&nbsp;<INPUT hideFocus class=addfileI type=file size=1 name="FF" onchange="this.form.submit()"></A>
+<INPUT TYPE="submit" value="提交">
+</FORM>
+ 
+</BODY>
+</HTML>

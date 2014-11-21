@@ -18,7 +18,8 @@ define(
               initialize: function() {
                   var template = _.template(Template, this.getTemplateData());
                   console.log(template);
-                  this.$el.html(template);
+                  $("#view").append(template);
+                  this.initUnConfigChannel();
               },
               getTemplateData: function() {
                   var pushData ={
@@ -76,6 +77,13 @@ define(
                       data: datas,
                       success:function() {
                           console.log("delete data is ok.");
+                      }
+                  });
+              },
+              initUnConfigChannel: function() {
+                  DynamicModel.getUnConfigChannels({
+                      success:function(data) {
+                          console.log(JSON.stringify(data));
                       }
                   });
               }

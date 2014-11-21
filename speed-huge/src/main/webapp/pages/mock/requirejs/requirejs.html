@@ -1,5 +1,6 @@
 <html>
   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
        <script type="text/javascript" data-main="/js/work/app.js" src="/js/frame/require-jquery.js"></script>
   	   
   	   <script type="text/javascript">
@@ -8,6 +9,27 @@
   </head>
   <body>
   	   <div id="view">
+  	       <div>
+  	       <input type="button" value="添加新的推送配置" id="addNewPush" />
+  	       
+  	         <dl>
+                            <dt>推送平台</dt>
+                            <dd>
+                                <div class="select-style">
+                                  <ul style="z-index:100">
+                                    <strong>选择推送平台<font>三角图标</font></strong>
+                                    <div style="max-height:120px; overflow:auto;">
+                                      <li data="1">个推</li> 
+                                      <li data="2">魔推</li> 
+                                      <li data="3" onclick="alert('llll')">百度推</li> 
+                                    </div>
+                                  </ul>
+                                </div>
+                            </dd>
+                        </dl>
+  	       </div>
+  	       
   	   </div>
+  	   
   </body>
 </html>
