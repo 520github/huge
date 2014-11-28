@@ -10,7 +10,10 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	
 	<aop:aspectj-autoproxy />
+	
 	 
+	<bean id="jsonProvider" class="me.power.speed.huge.rest.MyJacksonJsonProvider"/>
+	
 	<context:component-scan
 		base-package=" me.power.speed.huge.rest" />
 		
