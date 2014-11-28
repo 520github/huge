@@ -21,3 +21,6 @@
 /speed-batch/.settings
 /speed-batch/.git
 /speed-batch/target
+
+/speed-batch/logs
+/speed-common/logs
