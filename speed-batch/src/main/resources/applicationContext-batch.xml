@@ -1,0 +1,52 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+	
+    <aop:aspectj-autoproxy />
+
+    <!-- loda service -->
+	<context:component-scan
+		base-package="com.power.speed.batch" />
+	
+	<!-- enable autowire -->
+	<context:annotation-config />
+	
+	<!-- per week task start  -->
+	<bean id="TestDynamicJob" class="me.power.speed.batch.task.timerjob.TestDynamicTimeJob22" >
+	   <property name="scheduler" ref="schedulerFactory"/>
+	   <property name="triggerName" value="dynamicTrigger"></property>
+	</bean>
+	
+	<bean id="TestDynamicJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="TestDynamicJob" />
+		<property name="targetMethod" value="doJob" />
+		<property name="concurrent" value="false" />
+	</bean>
+	
+	<!-- trigger -->
+	<bean id="dynamicTrigger" class="me.power.speed.batch.task.trigger.DynamicCrontabTimeTrigger">
+		<property name="jobDetail" ref="TestDynamicJobDetail" />
+		<!--  每周5，18点执行 -->
+		<!-- 
+		<property name="cronExpression" value="0 0 18 ? * 5" />
+		 -->
+		<property name="cronExpression" value="0 */1 * * * ?" />
+	</bean>
+	<!-- per week task end  -->
+	<bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+		lazy-init="false" destroy-method="destroy">
+		<property name="triggers">
+			<list>
+				<ref bean="dynamicTrigger" />
+			</list>
+		</property>
+	</bean>
+</beans>

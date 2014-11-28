@@ -8,4 +8,18 @@
   <artifactId>speed-batch</artifactId>
   <name>speed batch</name>
   <description>this is speed batch project</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>me.power.speed</groupId>
+  		<artifactId>speed-common</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+		<groupId>quartz</groupId>
+		<artifactId>quartz</artifactId>
+		<version>1.5.2</version>
+	</dependency>
+  </dependencies>
+  <packaging>war</packaging>
 </project>
