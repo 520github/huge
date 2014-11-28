@@ -19,7 +19,7 @@
 	<context:annotation-config />
 	
 	<!-- per week task start  -->
-	<bean id="TestDynamicJob" class="me.power.speed.batch.task.timerjob.TestDynamicTimeJob22" >
+	<bean id="TestDynamicJob" class="me.power.speed.batch.task.timerjob.TestDynamicTimeJob" >
 	   <property name="scheduler" ref="schedulerFactory"/>
 	   <property name="triggerName" value="dynamicTrigger"></property>
 	</bean>
