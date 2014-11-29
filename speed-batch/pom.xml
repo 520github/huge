@@ -20,6 +20,11 @@
 		<artifactId>quartz</artifactId>
 		<version>1.5.2</version>
 	</dependency>
+  	<dependency>
+  		<groupId>me.power.speed</groupId>
+  		<artifactId>speed-log</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
   <packaging>war</packaging>
 </project>

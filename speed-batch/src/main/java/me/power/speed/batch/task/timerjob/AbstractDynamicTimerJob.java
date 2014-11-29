@@ -6,6 +6,7 @@ package me.power.speed.batch.task.timerjob;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.power.speed.batch.log.LogPortal;
 import me.power.speed.batch.task.handle.TaskHandle;
 
 import org.apache.commons.lang.StringUtils;
@@ -68,7 +69,7 @@ public abstract class AbstractDynamicTimerJob extends AbstractTimerJob {
 			scheduler.rescheduleJob(triggerName, Scheduler.DEFAULT_GROUP, trigger);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogPortal.getJobLog().logError("reset cron exception occure exception " + e.getMessage(), e);
 		}
 	}
 	

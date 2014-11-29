@@ -40,11 +40,14 @@ public class LogBackConfigLoader {
 		if(!externalConfigFile.canRead()){  
 			throw new IOException("Logback External Config File ["+configFileLocation+"] exists and is a file, but cannot be read."); 
 		}
+		
+		System.out.println("load logback file " + configFileLocation);
+		
 		JoranConfigurator configurator = new JoranConfigurator(); 
 		configurator.setContext(lc);
 		lc.reset();
 		configurator.doConfigure(configFileLocation);
-		StatusPrinter.printInCaseOfErrorsOrWarnings(lc);
+		//StatusPrinter.printInCaseOfErrorsOrWarnings(lc);
 	}
 	
 }

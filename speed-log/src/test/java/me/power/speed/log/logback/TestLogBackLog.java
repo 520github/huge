@@ -19,6 +19,8 @@ public class TestLogBackLog extends AbstractTest {
 	public void before() {
 		try {
 			LogBackConfigLoader.loadFromClassPath("logback-speed.xml");
+			//LogBackConfigLoader.loadFromClassPath("logback.xml");
+			//LogBackConfigLoader.load("logback-speed.xml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -27,8 +29,8 @@ public class TestLogBackLog extends AbstractTest {
 	
 	@Test
 	public void testLogInfo() {
-		log.setLogOneDynamicParameter("logType", "speed");
-		log.logInfo("this is info test");
+		log.setLogOneDynamicParameter("logType", "job");
+		log.logInfo("this is like test");
 	}
 	
 }

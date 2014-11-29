@@ -3,6 +3,8 @@
  */
 package me.power.speed.batch.task.handle;
 
+import me.power.speed.batch.log.LogPortal;
+
 /**
  * @author xuehui.miao
  *
@@ -13,7 +15,7 @@ public class TestTaskHandle implements TaskHandle {
 	 * @see me.power.speed.batch.task.handle.TaskHandle#handleTask()
 	 */
 	public void handleTask() {
-		System.out.println("this is a test task handle.");
+		LogPortal.getJobLog().logInfo("this is a test task handle.");
 	}
 
 }

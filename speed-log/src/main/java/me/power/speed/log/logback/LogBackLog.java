@@ -17,7 +17,7 @@ public class LogBackLog extends AbstractSlf4jLog {
 	 * @see me.power.speed.log.AbstractSlf4jLog#setLogDynamicParameter()
 	 */
 	public void setLogDynamicParameter(Map<String,Object> dynamicParameter) {
-		super.setDynamicParameter(dynamicParameter);
+		super.setLogDynamicParameter(dynamicParameter);
 	}
 
 }

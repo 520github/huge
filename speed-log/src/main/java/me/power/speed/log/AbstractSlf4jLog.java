@@ -15,9 +15,13 @@ import org.slf4j.MDC;
  *
  */
 public abstract class AbstractSlf4jLog {
-	public static boolean isPrintSystemOut = true;
+	public static boolean isPrintSystemOut = false;
 	private Map<String,Object> dynamicParameter ;
 	private static final Logger log = LoggerFactory.getLogger("log");
+	
+	public static enum LogDynamicFiled {
+		logType
+	}
 	
 	public void logDebug(String msg) {
 		logDebug(msg, this.getEmptyObject());
@@ -98,6 +102,13 @@ public abstract class AbstractSlf4jLog {
 	
 	public void setLogDynamicParameter(Map<String,Object> dynamicParameter) {
 		this.dynamicParameter = dynamicParameter;
+	}
+	
+	public void setLogOneDynamicParameter(LogDynamicFiled key, Object value) {
+		if(key == null) {
+			return;
+		}
+		this.setLogOneDynamicParameter(key.toString(), value);
 	}
 	
 	public void setLogOneDynamicParameter(String key, Object value) {
