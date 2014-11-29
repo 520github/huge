@@ -28,6 +28,18 @@
 /speed-log/.git
 /speed-log/target
 
+/speed-test/.classpath
+/speed-test/.project
+/speed-test/.settings
+/speed-test/.git
+/speed-test/target
+
+/speed-base/.classpath
+/speed-base/.project
+/speed-base/.settings
+/speed-base/.git
+/speed-base/target
+
 
 /speed-batch/logs
 /speed-common/logs

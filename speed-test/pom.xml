@@ -1,0 +1,118 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>me.power.speed</groupId>
+    <artifactId>speed</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>speed-test</artifactId>
+  <name>speed test</name>
+  <description>speed test</description>
+  
+  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>3.1.1.RELEASE</spring.version>
+  </properties>
+  
+  <!-- TODO: Rather use a repo. manager like nexus -->
+  <repositories>
+    <repository>
+      <id>jboss.com</id>
+      <url>http://repository.jboss.com/maven2/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>me.power.speed</groupId>
+  		<artifactId>speed-base</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-test</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	
+  	<dependency>
+		<groupId>org.springmodules</groupId>
+		<artifactId>spring-modules-cache</artifactId>
+		<version>0.8</version>
+		<exclusions>
+		  <exclusion>
+		     <groupId>gigaspaces</groupId>
+		     <artifactId>gigaspaces-ce</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jboss</groupId>
+		     <artifactId>jboss-common</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jboss</groupId>
+		     <artifactId>jboss-jmx</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jboss</groupId>
+		     <artifactId>jboss-minimal</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jboss</groupId>
+		     <artifactId>jboss-system</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jcs</groupId>
+		     <artifactId>jcs</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jini</groupId>
+		     <artifactId>boot</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jini</groupId>
+		     <artifactId>jsk-lib</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jini</groupId>
+		     <artifactId>jsk-platform</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jini</groupId>
+		     <artifactId>mahalo</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jini</groupId>
+		     <artifactId>reggie</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jini</groupId>
+		     <artifactId>start</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>jini</groupId>
+		     <artifactId>webster</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>xpp3</groupId>
+		     <artifactId>xpp3_min</artifactId>
+		  </exclusion>
+		  <exclusion>
+		     <groupId>ehcache</groupId>
+		     <artifactId>ehcache</artifactId>
+		  </exclusion>
+		</exclusions>
+	</dependency>
+
+  	<dependency>
+  		<groupId>ehcache</groupId>
+  		<artifactId>ehcache</artifactId>
+  		<version>1.2</version>
+  	</dependency>
+  </dependencies>
+</project>

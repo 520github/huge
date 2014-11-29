@@ -11,5 +11,8 @@
   <module>speed-batch</module>
   <module>speed-huge</module>
   <module>speed-log</module>
+  <module>speed-cache-client</module>
+  <module>speed-base</module>
+  <module>speed-test</module>
   </modules>
 </project>

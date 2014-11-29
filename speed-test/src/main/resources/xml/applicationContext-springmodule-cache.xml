@@ -1,0 +1,64 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<bean id="studentService" class="me.power.speed.test.springmodule.cache.StudentService"></bean>
+	
+	<!-- Using a EHCache cache manager -->
+     <bean id="cacheManager"
+         class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+         <!--<property name="cacheManagerName" value="mainCache"/>-->
+         <property name="configLocation" value="classpath:xml/ehcache.xml" />
+     </bean>
+ 
+     <!-- 使用Spring Modules对 EhCache的封装  -->
+     <bean id="cacheProviderFacade" class="org.springmodules.cache.provider.ehcache.EhCacheFacade">
+         <property name="cacheManager" ref="cacheManager" />
+     </bean>
+     
+     <!-- 配置 方法 拦截器  -->
+     <!-- 缓存拦截器 -->
+     <bean id="cachingInterceptor"
+         class="org.springmodules.cache.interceptor.caching.MethodMapCachingInterceptor">
+         <property name="cacheProviderFacade" ref="cacheProviderFacade" />
+         <property name="cachingModels"> <!-- 进行cache缓存 -->
+             <props> <!-- 所有StudentService对象中，以get开头的方法都将进行缓存 -->
+                 <prop key="me.power.speed.test.springmodule.cache.StudentService.get*">cacheName=testCache</prop>
+             </props>
+         </property>
+     </bean>
+     
+     <!-- 缓存刷新拦截器 -->
+     <bean id="flushingInterceptor"
+         class="org.springmodules.cache.interceptor.flush.MethodMapFlushingInterceptor">
+         <property name="cacheProviderFacade" ref="cacheProviderFacade" />
+         <property name="flushingModels"><!-- 进行cache刷新(清除) -->
+             <props>
+                 <prop key="me.power.speed.test.springmodule.cache.StudentService.set*">cacheNames=testCache</prop>
+             </props>
+         </property>
+     </bean>
+     
+     <!-- 配置 基于BeanName规则的动态代理封装 -->
+     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+         <property name="beanNames">
+             <list>
+                 <value>studentService</value>
+             </list>
+         </property>
+         <property name="interceptorNames">
+             <list>
+                 <value>cachingInterceptor</value>
+                 <value>flushingInterceptor</value>
+             </list>
+         </property>
+     </bean>
+ 
+</beans>
