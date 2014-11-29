@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import me.power.speed.test.AbstractSpringTest;
 
+//http://blog.csdn.net/pengchua/article/details/4401136
 public class TestStudentServiceCache extends AbstractSpringTest {
 	private StudentService ss;
 
