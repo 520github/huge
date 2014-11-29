@@ -22,6 +22,14 @@
 /speed-batch/.git
 /speed-batch/target
 
+/speed-log/.classpath
+/speed-log/.project
+/speed-log/.settings
+/speed-log/.git
+/speed-log/target
+
+
 /speed-batch/logs
 /speed-common/logs
 /speed-huge/logs
+/speed-log/logs

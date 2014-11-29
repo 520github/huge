@@ -10,5 +10,6 @@
   <module>speed-common</module>
   <module>speed-batch</module>
   <module>speed-huge</module>
+  <module>speed-log</module>
   </modules>
 </project>
