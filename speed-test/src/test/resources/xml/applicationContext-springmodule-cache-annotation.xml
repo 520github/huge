@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+     
+     <bean id="autoproxy"
+    class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+    
+     <bean id="cachingAttributeSource"  
+	  class="org.springmodules.cache.annotations.AnnotationCachingAttributeSource">  
+	</bean>  
+	  
+	<bean id="cachingInterceptorAnnotation"  
+	    class="org.springmodules.cache.interceptor.caching.MetadataCachingInterceptor">  
+	    <property name="cacheProviderFacade" ref="cacheProviderFacade" />  
+	    <property name="cachingAttributeSource" ref="cachingAttributeSource" />         
+	    <property name="cachingModels">  
+	        <props>  
+	            <prop key="dictCaching">cacheName=testCache</prop>  
+	        </props>            
+	    </property>  
+	</bean> 
+	
+	
+	 <bean id="cachingAttributeSourceAdvisor"
+    class="org.springmodules.cache.interceptor.caching.CachingAttributeSourceAdvisor">
+    <constructor-arg ref="cachingInterceptorAnnotation" />
+  </bean>
+  
+	
+	<bean id="flushingAttributeSource"  
+	  class="org.springmodules.cache.annotations.AnnotationFlushingAttributeSource">  
+	</bean>     
+	  
+	<bean id="flushingInterceptorAnnotion"  
+	    class="org.springmodules.cache.interceptor.flush.MetadataFlushingInterceptor">  
+	    <property name="cacheProviderFacade" ref="cacheProviderFacade" />   
+	    <property name="flushingAttributeSource" ref="flushingAttributeSource" />           
+	    <property name="flushingModels">  
+	        <props>  
+	            <prop key="dictFlushing">cacheNames=testCache</prop>  
+	        </props>  
+	    </property>  
+	</bean> 
+	
+	
+	<bean id="flushingAttributeSourceAdvisor"
+    class="org.springmodules.cache.interceptor.flush.FlushingAttributeSourceAdvisor">
+    <constructor-arg ref="flushingInterceptorAnnotion" />
+   </bean> 
+   
+     
+    <bean id="dictService" class="me.power.speed.test.springmodule.cache.AnnotationDictService"></bean>
+    
+</beans>
