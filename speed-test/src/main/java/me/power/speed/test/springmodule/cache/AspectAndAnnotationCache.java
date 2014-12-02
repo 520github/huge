@@ -22,7 +22,7 @@ public class AspectAndAnnotationCache {
 	//simple cache
 	private Map<String,Object> cacheMap = new HashMap<String, Object>();
 	
-	@Around("execution(public * com.power.speed.test..*.*(..))")
+	@Around("execution(public * me.power.speed.test..*.*(..))")
 	public Object getAndCache(ProceedingJoinPoint joinPoint) throws Throwable {
 		CacheAnnotation ca = this.getAnnotation(joinPoint, CacheAnnotation.class);
 		//not any cache annotation

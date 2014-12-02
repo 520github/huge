@@ -32,5 +32,12 @@ public class TestAspectAndAnnotationCacheService extends AbstractSpringTest {
 		value = service.getAspectAndAnnotationCache(key);
 		this.print(value);
 		
+		key = "22";
+		value = service.getAspectAndAnnotationCache(key);
+		this.print(value);
+		
+		value = service.getAspectAndAnnotationCache(key);
+		this.print(value);
+		
 	}
 }
