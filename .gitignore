@@ -40,6 +40,12 @@
 /speed-base/.git
 /speed-base/target
 
+/speed-db/.classpath
+/speed-db/.project
+/speed-db/.settings
+/speed-db/.git
+/speed-db/target
+
 
 /speed-batch/logs
 /speed-common/logs

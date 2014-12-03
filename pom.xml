@@ -14,5 +14,6 @@
   <module>speed-cache-client</module>
   <module>speed-base</module>
   <module>speed-test</module>
+  <module>speed-db</module>
   </modules>
 </project>

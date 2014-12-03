@@ -51,6 +51,18 @@
 		<artifactId>aspectjweaver</artifactId>
 		<version>1.6.11</version>
 	</dependency>
+	
+	<dependency>
+	    <groupId>com.github.davidmoten</groupId>
+	    <artifactId>rxjava-jdbc</artifactId>
+	    <version>0.4</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.33</version>
+	</dependency>
   	
   	<dependency>
 		<groupId>org.springmodules</groupId>

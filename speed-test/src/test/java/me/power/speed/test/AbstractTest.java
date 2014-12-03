@@ -25,6 +25,8 @@ public abstract class AbstractTest {
 				System.out.println(obj.toString());
 				return;
 			}
+			
+			System.out.println(obj.toString());
 
 //			String json = JacksonJsonUtil.convertObject2Json(obj);
 //			System.out.println(json);
