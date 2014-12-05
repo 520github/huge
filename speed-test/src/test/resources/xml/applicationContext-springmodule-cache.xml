@@ -8,8 +8,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-	
-	<bean id="studentService" class="me.power.speed.test.springmodule.cache.StudentService"></bean>
+		
 	
 	<!-- Using a EHCache cache manager -->
      <bean id="cacheManager"
@@ -30,7 +29,7 @@
          <property name="cacheProviderFacade" ref="cacheProviderFacade" />
          <property name="cachingModels"> <!-- 进行cache缓存 -->
              <props> <!-- 所有StudentService对象中，以get开头的方法都将进行缓存 -->
-                 <prop key="me.power.speed.test.springmodule.cache.StudentService.get*">cacheName=testCache</prop>
+                 <prop key="me.power.speed.test.springmodule.cache.IStudentService.get*">cacheName=testCache</prop>
              </props>
          </property>
      </bean>
@@ -41,7 +40,7 @@
          <property name="cacheProviderFacade" ref="cacheProviderFacade" />
          <property name="flushingModels"><!-- 进行cache刷新(清除) -->
              <props>
-                 <prop key="me.power.speed.test.springmodule.cache.StudentService.set*">cacheNames=testCache</prop>
+                 <prop key="me.power.speed.test.springmodule.cache.IStudentService.set*">cacheNames=testCache</prop>
              </props>
          </property>
      </bean>
@@ -50,7 +49,11 @@
      <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
          <property name="beanNames">
              <list>
-                 <value>studentService</value>
+                 <!-- 
+                 <value>studentService11</value>
+                  <idref local="studentService11" />
+                  -->
+                <value>studentService11</value>
              </list>
          </property>
          <property name="interceptorNames">
@@ -60,7 +63,6 @@
              </list>
          </property>
      </bean>
- 
      
-    
+     <bean id="studentService11" class="me.power.speed.test.springmodule.cache.StudentService"></bean>
 </beans>

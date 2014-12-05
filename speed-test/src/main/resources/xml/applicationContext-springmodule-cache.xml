@@ -9,8 +9,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	
-	<bean id="studentService" class="me.power.speed.test.springmodule.cache.StudentService"></bean>
-	
 	<!-- Using a EHCache cache manager -->
      <bean id="cacheManager"
          class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
@@ -60,5 +58,7 @@
              </list>
          </property>
      </bean>
+     
+     <bean id="studentService" class="me.power.speed.test.springmodule.cache.StudentService"></bean>
  
 </beans>

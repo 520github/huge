@@ -1,6 +1,6 @@
 package me.power.speed.test.springmodule.cache;
 
-public class StudentService {
+public class StudentService implements IStudentService {
      private String name = "matthew";
      
      public String getName() {

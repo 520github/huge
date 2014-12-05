@@ -22,7 +22,7 @@
 	    <property name="cachingAttributeSource" ref="cachingAttributeSource" />         
 	    <property name="cachingModels">  
 	        <props>  
-	            <prop key="dictCaching">cacheName=testCache</prop>  
+	            <prop key="dictCaching">cacheName=testCache1</prop>  
 	        </props>            
 	    </property>  
 	</bean> 
@@ -44,7 +44,7 @@
 	    <property name="flushingAttributeSource" ref="flushingAttributeSource" />           
 	    <property name="flushingModels">  
 	        <props>  
-	            <prop key="dictFlushing">cacheNames=testCache</prop>  
+	            <prop key="dictFlushing">cacheNames=testCache1</prop>  
 	        </props>  
 	    </property>  
 	</bean> 
