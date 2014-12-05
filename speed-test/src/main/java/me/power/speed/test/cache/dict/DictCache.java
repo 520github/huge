@@ -7,6 +7,11 @@ package me.power.speed.test.cache.dict;
  * @author xuehui.miao
  *
  */
+//https://github.com/Flipkart/GraceKelly/blob/master/core/src/main/java/lego/gracekelly/Kelly.java
+//https://github.com/almadiverso/Cinnamon-Cache
+//https://github.com/Cetsoft/imcache
+//https://github.com/yangfuhai/ASimpleCache
+//http://cache2k.org/
 public interface DictCache<T> {
 	
 	public void defineInitKeys();
