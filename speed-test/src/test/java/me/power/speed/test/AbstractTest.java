@@ -49,4 +49,9 @@ public abstract class AbstractTest {
 		e.printStackTrace();
 		Assert.fail(e.getMessage());
 	}
+	
+	protected String Int2Binary(int value) {
+		return Integer.toBinaryString(value);
+	}
+	
 }
