@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import me.power.speed.AbstractTest;
+import me.power.speed.AbstractBaseTest;
 
-public class AbstractJson extends AbstractTest {
+public class AbstractJson extends AbstractBaseTest {
 	protected static JsonObject jsonObj;
 	
 	protected void setJsonObject() {
-		String stringValue = "²âÊÔ×Ö·û´®";
+		String stringValue = "ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½";
         int intValue = 123456;
         double doubleValue = 123456.134456;
         long longValue = 1234567890L;

@@ -145,6 +145,38 @@
       <artifactId>ehcache</artifactId>
       <version>1.6.0</version>
     </dependency>
+    
+    <!-- start bitmap -->
+    <dependency>
+		<groupId>com.gameanalytics.bitmap</groupId>
+		<artifactId>game-bitmap-common</artifactId>
+		<version>0.0.18</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.gameanalytics.bitmap</groupId>
+		<artifactId>game-bitmap-impl</artifactId>
+		<version>0.0.18</version>
+	</dependency>
+    <!-- end bitmap -->
+    
+    <!-- redis start -->
+    <dependency>
+		<groupId>redis.clients</groupId>
+		<artifactId>jedis</artifactId>
+		<version>2.6.0</version>
+	</dependency>
+    <!-- end start -->
+    
+    <!--start test frame -->
+    <dependency>
+		<groupId>nanobench</groupId>
+		<artifactId>nanobench</artifactId>
+		<version>1.0</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/lib/nanobench.jar</systemPath>
+	</dependency>
+	<!-- end test frame -->
   	
   </dependencies>
 </project>

@@ -21,8 +21,9 @@ public class TestBaseJson extends AbstractJson {
 	 @Before
 	 public void before() {
 		 this.setJsonObject();
-		 threads = 1;
-		 SerialTimes =1;
+		 measurements =1;
+		 threads = 100000000;
+		 SerialTimes =1000;
 	 }
 	 
 	 @Test
@@ -46,14 +47,14 @@ public class TestBaseJson extends AbstractJson {
 	 }
 	 
 	 /*
-	     * ÔÚ»º´æÖØÓÃObjectMapperµÄÇé¿öÏÂÊ¹ÓÃjackson½øÐÐjsonÐòÁÐ»¯
+	     * ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ObjectMapperï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½jacksonï¿½ï¿½ï¿½ï¿½jsonï¿½ï¿½ï¿½Ð»ï¿½
 	     */
     @Test
     public void testJacksonWithCache() {
         Nano.bench().measurements(measurements).threads(threads).measure(
-                "[jackson£¨ÖØÓÃObjectMapper£©]", new Runnable() {
+                "[jacksonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ObjectMapperï¿½ï¿½]", new Runnable() {
                     public void run() {
-                        // ObjectMapperÖØÓÃ·½Ê½
+                        // ObjectMapperï¿½ï¿½ï¿½Ã·ï¿½Ê½
                         ObjectMapper mapper = new ObjectMapper();
                         //StringWriter writer = null;
 
@@ -75,17 +76,17 @@ public class TestBaseJson extends AbstractJson {
     }
     
     /*
-     * ÔÚ²»»º´æÖØÓÃObjectMapperµÄÇé¿öÏÂÊ¹ÓÃjackson½øÐÐjsonÐòÁÐ»¯
+     * ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ObjectMapperï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½jacksonï¿½ï¿½ï¿½ï¿½jsonï¿½ï¿½ï¿½Ð»ï¿½
      */
     @Test
     public void testJacksonWithoutCache() {
         Nano.bench().measurements(measurements).threads(threads).measure(
-                "[jackson£¨²»ÖØÓÃObjectMapper£©]", new Runnable() {
+                "[jacksonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ObjectMapperï¿½ï¿½]", new Runnable() {
                     public void run() {
                         StringWriter writer = null;
 
                         for (int i = 0; i < SerialTimes; i++) {
-                            // ObjectMapper·ÇÖØÓÃ·½Ê½
+                            // ObjectMapperï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½Ê½
                             ObjectMapper mapper = new ObjectMapper();
                             writer = new StringWriter();
                             try {
@@ -103,7 +104,7 @@ public class TestBaseJson extends AbstractJson {
                 });
     }
     
-    //Í¨¹ýjson-lib½øÐÐ´¦Àí
+    //Í¨ï¿½ï¿½json-libï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½
     @Test
     public void testJsonLib() {
         Nano.bench().measurements(measurements).threads(threads).measure("[json-lib]",

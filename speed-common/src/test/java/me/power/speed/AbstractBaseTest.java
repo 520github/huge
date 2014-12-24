@@ -15,6 +15,9 @@ import me.power.speed.common.location.ip.IpLocCltThreadLocal;
 import me.power.speed.common.stream.file.FileUtil;
 
 public class AbstractBaseTest {
+	protected static int measurements = 100;//��������
+	protected static int threads = 10;//�߳���
+	protected static int SerialTimes = 10000;//ÿ���߳�ִ�����л�����
 	
 	protected Date getCurrentDate() {
 		return new Date();
