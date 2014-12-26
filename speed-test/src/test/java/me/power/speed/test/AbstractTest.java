@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import me.power.speed.test.ConsumerTime.ConsumerTimeHandle;
 
@@ -43,8 +44,16 @@ public abstract class AbstractTest {
 	}
 	
 	protected List<Integer> getSortOffsetListByOffsetArray(int offsets[]) {
-		this.setOffsetsToList(offsets);
+		List<Integer> offsetLists = this.getOffsetsToList(offsets);
 		Collections.sort(offsetLists);
+		return offsetLists;
+	}
+	
+	protected List<Integer> getOffsetsToList(int offsets[]) {
+		List<Integer> offsetLists = new ArrayList<Integer>();
+		for(int offset: offsets) {
+			offsetLists.add(offset);
+		}
 		return offsetLists;
 	}
 	
@@ -238,5 +247,26 @@ public abstract class AbstractTest {
 	public AbstractTest setTitle(String title) {
 		this.title = title;
 		return this;
+	}
+	
+	public String getUUID() {
+		return UUID.randomUUID().toString();
+	}
+	
+	public List<String> getUUIDList(int cycleNum) {
+		List<String> list = new ArrayList<String>();
+		for(int i=0; i<cycleNum;i++) {
+			list.add(this.getUUID());
+		}
+		return list;
+	}
+	
+	public String[] getUUIDArray(int cycleNum) {
+		String result[] = new String[cycleNum];
+		for(int i=0; i<cycleNum;i++) {
+			result[i] = this.getUUID();
+		}
+		
+		return result;
 	}
 }

@@ -1,7 +1,7 @@
 package me.power.speed.test;
 
 public class ConsumerTime {
-	
+	protected static boolean isMoreTime = false;
 	public interface ConsumerTimeHandle {
 		public void handle();
 	}
@@ -18,7 +18,9 @@ public class ConsumerTime {
 		long consume = this.endTime - this.startTime;
 		
 		System.out.println("consume ms: " + consume);
-		System.out.println("consume m: " + consume/1000);
-		System.out.println("consume min: " + consume/1000/60);
+		if(isMoreTime) {
+			System.out.println("consume m: " + consume/1000);
+			System.out.println("consume min: " + consume/1000/60);
+		}
 	}
 }

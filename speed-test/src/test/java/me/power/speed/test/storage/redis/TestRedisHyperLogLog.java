@@ -3,6 +3,8 @@ package me.power.speed.test.storage.redis;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.power.speed.test.ConsumerTime.ConsumerTimeHandle;
+
 import org.junit.Test;
 
 public class TestRedisHyperLogLog extends AbstractRedisTest {
@@ -57,4 +59,33 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 		long result = RedisUtil.getCountFromPf(key);
 		this.print(result);
 	}
+	
+	@Test
+	public void testCycleSetUUID2HyperLogLog() {
+		key = "hll:20141226:06";
+		final List<String> dataList = this.getUUIDList(100000);
+		
+		this.handleWithConsumerTime(new ConsumerTimeHandle() {
+			public void handle() {
+				for(String data: dataList) {
+					redisTest.setValuesToPf(key, data);
+				}
+				redisTest.getAndPrintPfCount(key);
+			}
+		});
+	}
+	
+	@Test
+	public void testCycleSetArrayUUID2HyperLogLog() {
+		key = "hll:20141226:08";
+		final String datas[] = this.getUUIDArray(100000);
+		this.handleWithConsumerTime(new ConsumerTimeHandle() {
+			public void handle() {
+				redisTest.setValuesToPf(key, datas);
+				redisTest.getAndPrintPfCount(key);
+			}
+		});
+	}
+	
+	
 }
