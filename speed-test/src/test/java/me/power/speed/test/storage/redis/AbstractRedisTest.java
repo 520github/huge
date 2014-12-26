@@ -1,9 +1,13 @@
 package me.power.speed.test.storage.redis;
 
+import java.util.List;
+
 import com.gameanalytics.bitmap.Bitmap;
 import com.gameanalytics.bitmap.impl.ConciseBitmapImpl;
 
 import me.power.speed.test.AbstractTest;
+import me.power.speed.test.ConsumerTime;
+import me.power.speed.test.ConsumerTime.ConsumerTimeHandle;
 import me.power.speed.test.storage.bitmap.BitmapUtil;
 
 public class AbstractRedisTest extends AbstractTest {
@@ -21,8 +25,39 @@ public class AbstractRedisTest extends AbstractTest {
 		return RedisUtil.getValueFromKey(key);
 	}
 	
+	protected int[] getArraysByList(List<Integer> offsets) {
+		int arrays[] = new int[offsets.size()];
+		int count =0;
+		for(Integer offset: offsets) {
+			arrays[count] = offset;
+			count++;
+		}
+		return arrays;
+	}
+	
+	protected void handleBitmapToRedis(final Bitmap bitmap,final String key, final List<Integer> offsets) {
+		this.handleBitmapToRedis(bitmap, key, this.getArraysByList(offsets));
+	}
+	
+	protected void handleBitmapToRedis(final Bitmap bitmap,final String key, final int offsets[]) {
+		this.handleWithConsumerTime(new ConsumerTimeHandle() {
+			public void handle() {
+				for(int offset : offsets) {
+					bitmap.set(offset);
+				}
+				ConsumerTime ct = new ConsumerTime();
+				redisTest.setValueToRedis(key, redisTest.getBytesFromBitmap(bitmap));
+				ct.endConsumeTime();
+			}
+		});
+		this.print(key, true);
+		this.print(this.getBitmapCount(key), true);
+	}
+	
 	protected byte[] getBytesFromBitmap(Bitmap bitmap) {
+		ConsumerTime cs = new ConsumerTime();
 		byte datas[]= BitmapUtil.bitmapToByteArray(bitmap);
+		cs.endConsumeTime();
 		this.print("bitmap bytes length:" + datas.length);
 		return datas;
 	}
@@ -46,7 +81,7 @@ public class AbstractRedisTest extends AbstractTest {
 	}
 	
 	protected int getBitmapCount(byte datas[]) {
-		this.print("bytes length:" + datas.length);
+		this.print("bytes length:" + datas.length, true);
 		Bitmap bitmap = this.getBitmapFromBytes(datas);
 		return bitmap.cardinary();
 	}
