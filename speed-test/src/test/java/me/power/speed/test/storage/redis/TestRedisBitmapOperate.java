@@ -37,8 +37,17 @@ public class TestRedisBitmapOperate extends AbstractRedisTest {
 	@Test
 	public void testMulitRedisBitmapAndOperate() {
 		this.isSortWithRandom = true;
-		int cycleNum = 5;
+		int cycleNum = 50;
 		this.handleMulitBitmapAndOperate(this.getBitmaps(cycleNum));
+	}
+	
+	@Test
+	public void testMulitRedisBitmapOrAndOperate() {
+		this.isSortWithRandom = true;
+		Bitmap fbitmaps[] = this.getBitmaps(50);
+		Bitmap sbitmaps[] = this.getBitmaps(50);
+		
+		this.handleMulitBitmapOrAndOperate(fbitmaps, sbitmaps);
 	}
 	
 	private void setOffsetToBitmap() {

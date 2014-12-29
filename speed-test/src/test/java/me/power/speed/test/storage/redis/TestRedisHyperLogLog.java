@@ -77,8 +77,8 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 	
 	@Test
 	public void testCycleSetArrayUUID2HyperLogLog() {
-		key = "hll:20141226:08";
-		final String datas[] = this.getUUIDArray(100000);
+		key = "hll:20141229:11";
+		final String datas[] = this.getUUIDArray(50000);
 		this.handleWithConsumerTime(new ConsumerTimeHandle() {
 			public void handle() {
 				redisTest.setValuesToPf(key, datas);

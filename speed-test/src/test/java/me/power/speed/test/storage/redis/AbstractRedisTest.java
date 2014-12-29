@@ -89,6 +89,54 @@ public class AbstractRedisTest extends AbstractTest {
 		});
 	}
 	
+	protected void handleMulitBitmapOrAndOperate(final Bitmap fbitmaps[], final Bitmap sbitmaps[]) {
+		int count =1;
+		for(Bitmap bitmap: fbitmaps) {
+			this.print("fbitmap " + count + " count:" + bitmap.cardinary(), true);
+			count++;
+		}
+		count =1;
+		for(Bitmap bitmap: sbitmaps) {
+			this.print("sbitmap " + count + " count:" + bitmap.cardinary(), true);
+			count++;
+		}
+		this.handleWithConsumerTime(new ConsumerTimeHandle() {
+			public void handle() {
+				Bitmap fresult = null;
+				int count =1;
+				for(Bitmap bitmap: fbitmaps) {
+					if(count ==1) {
+						fresult = bitmap;
+					}
+					else {
+						fresult = fresult.or(bitmap);
+					}
+					count++;
+				}
+				redisTest.print("first bitmap count:" + fresult.cardinary(), true);
+				
+				Bitmap sresult = null;
+				int scount = 1;
+				for(Bitmap bitmap: sbitmaps) {
+					if(scount ==1) {
+						sresult = bitmap;
+					}
+					else {
+						sresult = sresult.or(bitmap);
+					}
+					scount++;
+				}
+				redisTest.print("second bitmap count:" + sresult.cardinary(), true);
+				
+				
+				Bitmap result = fresult.and(sresult);
+				ConsumerTime ct = new ConsumerTime();
+				redisTest.print("result bitmap count:" + result.cardinary(), true);
+				ct.endConsumeTime();
+			}
+		});
+	}
+	
 	protected void handleBitmapAndOperate(final Bitmap fBitmap, final Bitmap sBitmap) {
 		this.print("first bitmap:" + fBitmap.cardinary(), true);
 		this.print("second bitmap:" + sBitmap.cardinary(), true);
