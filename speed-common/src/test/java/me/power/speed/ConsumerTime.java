@@ -16,4 +16,8 @@ public class ConsumerTime {
 		System.out.println("consume m: " + consume/1000);
 		System.out.println("consume min: " + consume/1000/60);
 	}
+	
+	public interface ConsumerTimeHandle {
+		public void handle();
+	}
 }

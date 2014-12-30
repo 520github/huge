@@ -4,12 +4,12 @@
 package me.power.speed.storage.redis.bitmap.impl;
 
 import com.gameanalytics.bitmap.Bitmap;
-import com.gameanalytics.bitmap.common.BitmapHandler;
 import com.gameanalytics.bitmap.impl.ConciseBitmapImpl;
 
 import redis.clients.jedis.Jedis;
 import me.power.speed.storage.redis.bitmap.AbstractRedisBitmap;
 import me.power.speed.storage.redis.bitmap.exception.RedisBitmapException;
+import me.power.speed.storage.redis.bitmap.util.CompressBitmapUtil;
 
 /**
  * @author xuehui.miao
@@ -79,7 +79,7 @@ public class RedisCompressBitmapImpl extends AbstractRedisBitmap {
 		if(datas == null) {
 			return new ConciseBitmapImpl();
 		}
-		return BitmapHandler.byteArrayToBitmap(datas);
+		return CompressBitmapUtil.getBitmapFromBytes(datas);
 	}
 	
 	/**
@@ -88,8 +88,7 @@ public class RedisCompressBitmapImpl extends AbstractRedisBitmap {
 	 * @return
 	 */
 	protected byte[] getBytesFromBitmap(Bitmap bitmap) {
-		byte datas[]= BitmapHandler.bitmapToByteArray(bitmap);
-		return datas;
+		return CompressBitmapUtil.getBytesFromBitmap(bitmap);
 	}
 
 }

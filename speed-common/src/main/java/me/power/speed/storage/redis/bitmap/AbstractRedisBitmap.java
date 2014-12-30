@@ -46,6 +46,12 @@ public abstract class AbstractRedisBitmap implements RedisBitmap {
 	protected abstract int OnGetBitmapCount(Jedis jedis, String key) throws RedisBitmapException;
 	
 	
+	public byte[] getBitmapBytes(Jedis jedis, String key) throws RedisBitmapException {
+		this.checkParameter(jedis, key);
+		return this.getBytesValueFromRedis(jedis, key);
+	}
+	
+	
 	public final int handleBitmapOr(Jedis jedis, String...keys) throws RedisBitmapException {
 		this.checkParameter(jedis, keys);
 		return this.onHandleBitmapOr(jedis, keys);

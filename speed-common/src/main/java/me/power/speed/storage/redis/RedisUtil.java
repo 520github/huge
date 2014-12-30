@@ -1,8 +1,20 @@
-package me.power.speed.test.storage.redis;
+package me.power.speed.storage.redis;
 
 import redis.clients.jedis.Jedis;
 
 public class RedisUtil {
+	
+	public static void setBitmap(String key, long offset) {
+		Jedis jedis = null;
+		try {
+			jedis = getRedisConnection();
+			jedis.setbit(key, offset, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			returnRedisConnector(jedis);
+		}
+	}
 	
 	public static void setValueToKey(String key, byte[] value) {
 		Jedis jedis = null;
