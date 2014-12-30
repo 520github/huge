@@ -25,7 +25,7 @@ public abstract class AbstractTest {
 	protected int threads = 1;//线程数
 	protected int SerialTimes = 1;//循环次数
 	protected String title = "";
-	protected boolean isPrint = false;
+	protected boolean isPrint = true;
 	protected static Set<Integer> offsetSets = new HashSet<Integer>();
 	protected static List<Integer> offsetLists = new ArrayList<Integer>();
 	
