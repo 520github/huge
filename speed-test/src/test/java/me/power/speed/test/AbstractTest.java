@@ -3,6 +3,9 @@
  */
 package me.power.speed.test;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -10,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import me.power.speed.common.stream.file.FileUtil;
 import me.power.speed.test.ConsumerTime.ConsumerTimeHandle;
 
 import org.junit.Assert;
@@ -268,5 +272,31 @@ public abstract class AbstractTest {
 		}
 		
 		return result;
+	}
+	
+	public void write2File(String filePath, String message) {
+		try {
+			FileUtil.appendWrite2File(filePath, message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	protected String getTimeString() {
+		return this.getTimeString(System.currentTimeMillis());
+	}
+	
+	protected String getTimeString(long time) {
+		Timestamp ts = new Timestamp(time);
+		return ts.toString();
+	}
+	
+	protected String getCurrentTimeFileName() {
+		return this.getTimestampString().replaceAll(" ", "-").replaceAll(":", "-");
+	}
+	
+	protected String getTimestampString() {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss SSS");
+		return df.format(new Timestamp(System.currentTimeMillis()));
 	}
 }

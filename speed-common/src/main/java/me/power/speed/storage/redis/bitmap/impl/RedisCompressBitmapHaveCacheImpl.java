@@ -19,7 +19,7 @@ import redis.clients.jedis.Jedis;
  */
 public class RedisCompressBitmapHaveCacheImpl extends RedisCompressBitmapImpl {
 	//当某个key的offset达到某个阈值时，提交缓存数据到redis
-	private static int COMMIT_TO_REDIS_LIMIT_OFFSET = 10000;
+	private static int COMMIT_TO_REDIS_LIMIT_OFFSET = 100;
 	
 	private static ConcurrentHashMap<String, Bitmap> keyBitmapCache = new ConcurrentHashMap<String, Bitmap>();
 	

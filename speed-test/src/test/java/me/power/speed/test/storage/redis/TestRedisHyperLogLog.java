@@ -8,6 +8,9 @@ import me.power.speed.test.ConsumerTime.ConsumerTimeHandle;
 import org.junit.Test;
 
 public class TestRedisHyperLogLog extends AbstractRedisTest {
+	private static int diffCount =0;
+	private static int moreMax =0;
+	private static int lessMax =0;
 	private String key = "hll-1";
 	
 	@Test
@@ -77,14 +80,67 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 	
 	@Test
 	public void testCycleSetArrayUUID2HyperLogLog() {
-		key = "hll:20141229:11";
-		final String datas[] = this.getUUIDArray(50000);
-		this.handleWithConsumerTime(new ConsumerTimeHandle() {
-			public void handle() {
-				redisTest.setValuesToPf(key, datas);
-				redisTest.getAndPrintPfCount(key);
-			}
-		});
+//		String keyBase = "hll:20141231:";
+//		final int uuidNum = 1000;
+//		for(int i=0; i< 30; i++) {
+//			final String key = keyBase + i;
+//			final String datas[] = this.getUUIDArray(uuidNum);
+//			this.handleWithConsumerTime(new ConsumerTimeHandle() {
+//				public void handle() {
+//					redisTest.setValuesToPf(key, datas);
+//					redisTest.getAndPrintPfCount(key, uuidNum);
+//				}
+//			});
+//		}
+//		this.print(count, true);
+		this.cycleSetArrayUUID2HyperLogLog(1000, 30);
+	}
+	
+	@Test
+	public void testMulitCycleSetArrayUUID2HyperLogLog() {
+		int uuidNums[] = new int[] {50,100,200,500,1000,1500,2000,3000,4000,5000,6000,7000,8000,9000,10000};
+		int cycleNum =30;
+		for(int uuidNum: uuidNums) {
+			this.cycleSetArrayUUID2HyperLogLog(uuidNum,cycleNum);
+		}
+	}
+	
+	private void cycleSetArrayUUID2HyperLogLog(final int uuidNum, int cycleNum) {
+		String path = "C:\\xuehui\\50-temp\\90-temp\\hll\\";
+		final String filePath = path + uuidNum + ".txt";
+		String keyPre = "hll:" + this.getTimestampString() + ":";
+		for(int i=0; i<cycleNum;i++) {
+			final String key = keyPre + i;
+			final String datas[] = this.getUUIDArray(uuidNum);
+			this.handleWithConsumerTime(new ConsumerTimeHandle() {
+				public void handle() {
+					redisTest.setValuesToPf(key, datas);
+					long result = redisTest.getPfCount(key);
+					if(uuidNum != result) {
+						diffCount++;
+						redisTest.write2File(filePath, key + "->" + result + "->" + uuidNum);
+						if(uuidNum - result > 0) {
+							int df = uuidNum - (int)result;
+							if(df > lessMax) {
+								lessMax = df;
+							}
+						}
+						else {
+							int df = (int)result - uuidNum;
+							if(df > moreMax) {
+								moreMax = df;
+							}
+						}
+					}
+				}
+			});
+		}
+		this.write2File(filePath, "diff count:" + diffCount);
+		this.write2File(filePath, "moreMax:" + moreMax);
+		this.write2File(filePath, "lessMax:" + lessMax);
+		diffCount =0;
+		moreMax =0;
+		lessMax = 0;
 	}
 	
 	

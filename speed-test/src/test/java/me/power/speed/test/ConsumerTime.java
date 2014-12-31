@@ -1,6 +1,7 @@
 package me.power.speed.test;
 
 public class ConsumerTime {
+	protected static boolean isPrintTime = false;
 	protected static boolean isMoreTime = false;
 	public interface ConsumerTimeHandle {
 		public void handle();
@@ -16,6 +17,10 @@ public class ConsumerTime {
 	public void endConsumeTime() {
 		this.endTime = System.currentTimeMillis();
 		long consume = this.endTime - this.startTime;
+		
+		if(!isPrintTime) {
+			return;
+		}
 		
 		System.out.println("consume ms: " + consume);
 		if(isMoreTime) {

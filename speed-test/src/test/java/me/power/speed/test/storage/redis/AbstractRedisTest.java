@@ -12,6 +12,7 @@ import me.power.speed.test.storage.bitmap.BitmapUtil;
 
 public class AbstractRedisTest extends AbstractTest {
 	protected static AbstractRedisTest redisTest = new AbstractRedisTest();
+	protected static int count =0;
 	
 	protected RedisUtil getRedisUtil() {
 		return new RedisUtil();
@@ -241,5 +242,19 @@ public class AbstractRedisTest extends AbstractTest {
 		long result = RedisUtil.getCountFromPf(key);
 		ct.endConsumeTime();
 		this.print(key + ":" +result,true);
+	}
+	
+	public void getAndPrintPfCount(String key, long expect) {
+		ConsumerTime ct = new ConsumerTime();
+		long result = RedisUtil.getCountFromPf(key);
+		ct.endConsumeTime();
+		if(expect != result) {
+			this.print(key + ":" +result + " is not equal " + expect,true);
+			count++;
+		}	
+	}
+	
+	public long getPfCount(String key) {
+		return RedisUtil.getCountFromPf(key);
 	}
 }

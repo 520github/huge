@@ -39,7 +39,7 @@ public class TestRedisCompressBitmapHaveCacheImpl extends
 		
 		ConsumerTime ct = new ConsumerTime();
 		for(String key: keys) {
-			int offsets[] = this.getIncreamIntArrays(10000, 1, 100);//10001
+			int offsets[] = this.getIncreamIntArrays(101, 1, 100);//10001
 			this.testSetBitmapOffset(key, offsets);
 		}
 		ct.endConsumeTime();
@@ -65,14 +65,14 @@ public class TestRedisCompressBitmapHaveCacheImpl extends
 	}
 	
 	protected int[] getProductIds() {
-		return this.getIncreamIntArrays(20, 12000, 1);
+		return this.getIncreamIntArrays(500, 12000, 1);
 	}
 	
 	protected int[] getGameServers() {
-		return this.getIncreamIntArrays(30, 99000, 1);
+		return this.getIncreamIntArrays(60, 99000, 1);
 	}
 	
 	protected int[] getPartners() {
-		return this.getIncreamIntArrays(30, 96000, 1);
+		return this.getIncreamIntArrays(60, 96000, 1);
 	}
 }
