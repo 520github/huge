@@ -18,6 +18,22 @@ public class AbstractRedisTest extends AbstractTest {
 		return new RedisUtil();
 	}
 	
+	protected void handleWithConsumerTimeAndRedisMemory(ConsumerTimeHandle handle, int cycleNum) {
+		long beforeUsedMemory = this.getRedisUsedMemory();
+		ConsumerTime ct = new ConsumerTime();
+		handle.handle();
+		ct.endConsumeTime();
+		long afterUsedMemory = this.getRedisUsedMemory();
+		long usedMemory = afterUsedMemory - beforeUsedMemory;
+		this.print("used total memory:" + usedMemory, true);
+		this.print("per used memory:" + usedMemory/cycleNum, true);
+		this.print("------------------------", true);
+	}
+	
+	protected long getRedisUsedMemory() {
+		return RedisUtil.getRedisCurrentUsedMemory();
+	}
+	
 	protected void setValueToRedis(String key, byte[] datas) {
 	    RedisUtil.setValueToKey(key, datas);
 	}
@@ -241,7 +257,7 @@ public class AbstractRedisTest extends AbstractTest {
 		ConsumerTime ct = new ConsumerTime();
 		long result = RedisUtil.getCountFromPf(key);
 		ct.endConsumeTime();
-		this.print(key + ":" +result,true);
+		this.print(key + "->" +result,true);
 	}
 	
 	public void getAndPrintPfCount(String key, long expect) {

@@ -11,6 +11,7 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 	private static int diffCount =0;
 	private static int moreMax =0;
 	private static int lessMax =0;
+	private static int avg = 0;
 	private String key = "hll-1";
 	
 	@Test
@@ -79,26 +80,59 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 	}
 	
 	@Test
+	public void testSetSameUUID2HyperLogLog() {
+		final String key = "hll:same:20150104:02";
+		final String datas[] = this.getSameUUIDArray(100000);
+		this.handleWithConsumerTime(new ConsumerTimeHandle() {
+			public void handle() {
+				redisTest.setValuesToPf(key, datas);
+				redisTest.getAndPrintPfCount(key);
+			}
+		});
+	}
+	
+	@Test
+	public void testCycleArrayUUID2Set() {
+		int uuidNum = 10;
+		this.cycleArrayUUID2Set(uuidNum);
+	}
+	
+	@Test
+	public void testMulitCycleArrayUUID2Set() {
+		int uuidNums[] = new int[] {50,100,200,500,1000,1500,2000,3000,4000,5000,6000,7000,8000,9000,10000,20000,50000,80000,100000,300000,500000,800000};
+		for(int uuidNum: uuidNums) {
+			this.cycleArrayUUID2Set(uuidNum);
+		}
+	}
+	
+	private void cycleArrayUUID2Set(int uuidNum) {
+		final boolean isBatch = true;
+		final String datas[] = this.getUUIDArray(uuidNum);
+		final String key = "key:set:uuid:" + uuidNum;
+		this.handleWithConsumerTimeAndRedisMemory(new ConsumerTimeHandle() {
+			public void handle() {
+				if(isBatch) {
+					RedisUtil.addValuesToSet(key, datas);
+				}
+				else {
+					for(String data: datas) {
+						RedisUtil.addValuesToSet(key, data);
+					}
+				}
+			}
+		},1);
+	}
+	
+	@Test
 	public void testCycleSetArrayUUID2HyperLogLog() {
-//		String keyBase = "hll:20141231:";
-//		final int uuidNum = 1000;
-//		for(int i=0; i< 30; i++) {
-//			final String key = keyBase + i;
-//			final String datas[] = this.getUUIDArray(uuidNum);
-//			this.handleWithConsumerTime(new ConsumerTimeHandle() {
-//				public void handle() {
-//					redisTest.setValuesToPf(key, datas);
-//					redisTest.getAndPrintPfCount(key, uuidNum);
-//				}
-//			});
-//		}
-//		this.print(count, true);
-		this.cycleSetArrayUUID2HyperLogLog(1000, 30);
+		for(int i=0;i<1;i++) {
+			this.cycleSetArrayUUID2HyperLogLog(1, 30);
+		}
 	}
 	
 	@Test
 	public void testMulitCycleSetArrayUUID2HyperLogLog() {
-		int uuidNums[] = new int[] {50,100,200,500,1000,1500,2000,3000,4000,5000,6000,7000,8000,9000,10000};
+		int uuidNums[] = new int[] {20,30,40,50,100,200,500,1000,1500,2000,3000,4000,5000,6000,7000,8000,9000,10000,20000,50000,80000,100000,300000,500000,800000};
 		int cycleNum =30;
 		for(int uuidNum: uuidNums) {
 			this.cycleSetArrayUUID2HyperLogLog(uuidNum,cycleNum);
@@ -106,9 +140,11 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 	}
 	
 	private void cycleSetArrayUUID2HyperLogLog(final int uuidNum, int cycleNum) {
-		String path = "C:\\xuehui\\50-temp\\90-temp\\hll\\";
+		long beforeUsedMemory = this.getRedisUsedMemory();
+		String ts = this.getTimestampString().replaceAll(" ", "-").replaceAll(":", "-");
+		String path = "C:\\xuehui\\50-temp\\90-temp\\hll\\";//+ ts + "\\";
 		final String filePath = path + uuidNum + ".txt";
-		String keyPre = "hll:" + this.getTimestampString() + ":";
+		String keyPre = "hll:12347:" + ts + ":" + uuidNum;
 		for(int i=0; i<cycleNum;i++) {
 			final String key = keyPre + i;
 			final String datas[] = this.getUUIDArray(uuidNum);
@@ -116,8 +152,10 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 				public void handle() {
 					redisTest.setValuesToPf(key, datas);
 					long result = redisTest.getPfCount(key);
+					
 					if(uuidNum != result) {
 						diffCount++;
+						avg = avg + Math.abs(uuidNum - (int)result);
 						redisTest.write2File(filePath, key + "->" + result + "->" + uuidNum);
 						if(uuidNum - result > 0) {
 							int df = uuidNum - (int)result;
@@ -135,12 +173,22 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 				}
 			});
 		}
+		long afterUsedMemory = this.getRedisUsedMemory();
+		long usedMemory = afterUsedMemory - beforeUsedMemory;
+		this.write2File(filePath, "used total memory:" + usedMemory + ",per used memory:" + usedMemory/cycleNum);
 		this.write2File(filePath, "diff count:" + diffCount);
-		this.write2File(filePath, "moreMax:" + moreMax);
-		this.write2File(filePath, "lessMax:" + lessMax);
+		this.write2File(filePath, "moreMax:" + moreMax + ", percent:" + this.getPercent(moreMax, uuidNum));
+		this.write2File(filePath, "lessMax:" + lessMax + ", percent:" + this.getPercent(lessMax, uuidNum));
+		avg = avg /diffCount;
+		this.write2File(filePath, "avg:" + avg + ", avg:" + this.getPercent(avg, uuidNum));
 		diffCount =0;
 		moreMax =0;
 		lessMax = 0;
+		avg = 0;
+	}
+	
+	private String getPercent(int fz, int fm) {
+		return String.valueOf((double)((double)fz/(double)fm)*100) + "%";
 	}
 	
 	

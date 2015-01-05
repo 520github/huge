@@ -265,10 +265,29 @@ public abstract class AbstractTest {
 		return list;
 	}
 	
+	public List<String> getSameUUIDList(int cycleNum) {
+		String uuid = this.getUUID();
+		List<String> list = new ArrayList<String>();
+		for(int i=0; i<cycleNum;i++) {
+			list.add(uuid);
+		}
+		return list;
+	}
+	
 	public String[] getUUIDArray(int cycleNum) {
 		String result[] = new String[cycleNum];
 		for(int i=0; i<cycleNum;i++) {
 			result[i] = this.getUUID();
+		}
+		
+		return result;
+	}
+	
+	public String[] getSameUUIDArray(int cycleNum) {
+		String uuid = this.getUUID();
+		String result[] = new String[cycleNum];
+		for(int i=0; i<cycleNum;i++) {
+			result[i] = uuid;
 		}
 		
 		return result;
