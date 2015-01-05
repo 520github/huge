@@ -5,13 +5,20 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 
+import redis.clients.util.MurmurHash;
+
 import com.tendcloud.iplocation.thrift.IpLocation;
 
+import me.power.speed.base.hashcode.HashCodeUtils;
+import me.power.speed.base.hashcode.MurMurHashCode;
 import me.power.speed.common.json.JacksonJsonUtil;
 import me.power.speed.common.location.ip.IpLocCltThreadLocal;
 import me.power.speed.common.stream.file.FileUtil;
@@ -26,6 +33,19 @@ public class AbstractBaseTest {
 		ConsumerTime ct = new ConsumerTime();
 		handle.handle();
 		ct.endConsumeTime();
+	}
+	
+	protected long getMurMurHashCode(String key) {
+		return MurMurHashCode.hash(key);
+	}
+	
+	protected int getMurMurHashCodeByRedis(String key) {
+		return MurmurHash.hash(key.getBytes(), 1);
+	}
+	
+	protected int hashCodeObject(String key) {
+		return key.hashCode();
+		//return HashCodeUtils.reflectionHashCode(key);
 	}
 	
 	protected Date getCurrentDate() {
@@ -242,4 +262,26 @@ public class AbstractBaseTest {
 		this.print("incream int size:" + resultArrays.length, true);
 		return resultArrays;
 	}
+	
+	protected int[] getUUIDHashCodeArrays(int cycleNum) {
+		int resultArrays[] = new int[cycleNum];
+		Set<Integer> set = new HashSet<Integer>();
+		int maxValue = 1040187422;
+		for(int i=0; i< cycleNum; i++) {
+			String uuid = this.getUUID();
+			int hashCode = Math.abs(this.getMurMurHashCodeByRedis(uuid));
+			if(hashCode > maxValue) {
+				hashCode = maxValue - cycleNum + i;
+			}
+			resultArrays[i] = hashCode;
+			set.add(hashCode);
+		}
+		this.print("cycleNum:" + cycleNum + ",set size:" + set.size(), true);
+		return resultArrays;
+	}
+	
+	protected String getUUID() {
+		return UUID.randomUUID().toString();
+	}
 }
+ 

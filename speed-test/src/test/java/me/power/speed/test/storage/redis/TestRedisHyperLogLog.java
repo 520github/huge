@@ -126,7 +126,7 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 	@Test
 	public void testCycleSetArrayUUID2HyperLogLog() {
 		for(int i=0;i<1;i++) {
-			this.cycleSetArrayUUID2HyperLogLog(1, 30);
+			this.cycleSetArrayUUID2HyperLogLog(1000, 30);
 		}
 	}
 	
@@ -175,7 +175,7 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 		}
 		long afterUsedMemory = this.getRedisUsedMemory();
 		long usedMemory = afterUsedMemory - beforeUsedMemory;
-		this.write2File(filePath, "used total memory:" + usedMemory + ",per used memory:" + usedMemory/cycleNum);
+		this.write2File(filePath, "beforeValue:"+beforeUsedMemory+",afterUsedMemory:"+afterUsedMemory+",used total memory:" + usedMemory + ",per used memory:" + usedMemory/cycleNum);
 		this.write2File(filePath, "diff count:" + diffCount);
 		this.write2File(filePath, "moreMax:" + moreMax + ", percent:" + this.getPercent(moreMax, uuidNum));
 		this.write2File(filePath, "lessMax:" + lessMax + ", percent:" + this.getPercent(lessMax, uuidNum));
@@ -188,6 +188,9 @@ public class TestRedisHyperLogLog extends AbstractRedisTest {
 	}
 	
 	private String getPercent(int fz, int fm) {
+		if(fz == 0 || fm == 0) {
+			return "0%";
+		}
 		return String.valueOf((double)((double)fz/(double)fm)*100) + "%";
 	}
 	

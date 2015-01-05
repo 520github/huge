@@ -10,6 +10,7 @@ public abstract class AbstractRedisBitmapTest extends AbstractBaseTest {
 	protected RedisBitmap redisBitmap;
 	
 	protected void testSetBitmapOffset(final String key, final int offsets[]) {
+		long beforeValue = RedisUtil.getRedisCurrentUsedMemory();
 		final Jedis jedis = this.getJedis();
 		this.handleWithConsumerTime(new ConsumerTimeHandle() {
 			public void handle() {
@@ -22,7 +23,14 @@ public abstract class AbstractRedisBitmapTest extends AbstractBaseTest {
 				}
 			}
 		});
+		
+		this.print("get bitmap count....", true);
+		this.testGetBitmapCount(key);
 		this.returnJedis(jedis);
+		
+		long afterValue = RedisUtil.getRedisCurrentUsedMemory();
+		long usedValue = afterValue - beforeValue;
+		this.print("beforeValue:"+beforeValue+",afterValue:"+afterValue+",used memory " + usedValue, true);
 	}
 	
 	protected void testGetBitmapCount(final String key) {
