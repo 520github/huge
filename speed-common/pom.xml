@@ -343,12 +343,16 @@
 		<groupId>com.gameanalytics.bitmap</groupId>
 		<artifactId>game-bitmap-common</artifactId>
 		<version>0.0.18</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/lib/game-bitmap-common-0.0.18.jar</systemPath>
 	</dependency>
 	
 	<dependency>
 		<groupId>com.gameanalytics.bitmap</groupId>
 		<artifactId>game-bitmap-impl</artifactId>
 		<version>0.0.18</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/lib/game-bitmap-impl-0.0.18.jar</systemPath>
 	</dependency>
     <!-- end bitmap -->
 	
