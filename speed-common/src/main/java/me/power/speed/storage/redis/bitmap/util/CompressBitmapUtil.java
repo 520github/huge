@@ -1,5 +1,9 @@
 package me.power.speed.storage.redis.bitmap.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import com.gameanalytics.bitmap.Bitmap;
 import com.gameanalytics.bitmap.common.BitmapHandler;
 
@@ -68,4 +72,29 @@ public class CompressBitmapUtil {
 		byte datas[]= BitmapHandler.bitmapToByteArray(bitmap);
 		return datas;
 	}
+	
+	public static Bitmap getBitmapFromFile(File file) throws IOException {
+		FileInputStream fis=null;
+		try
+		{
+			fis=new FileInputStream(file);
+			Bitmap bitmap=BitmapHandler.byteStreamToBitmap(fis);
+			System.out.println(file.getName() + " [size]:" +bitmap.cardinary() + ",bytes length:" + BitmapHandler.bitmapToByteArray(bitmap).length);
+			return bitmap;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			if(fis!=null){
+				fis.close();
+			}
+		}
+		return null;
+	}
+	
+	public static Bitmap getBitmapFromFileName(String file) throws IOException{
+		return getBitmapFromFile(new File(file));
+	}
+
 }
