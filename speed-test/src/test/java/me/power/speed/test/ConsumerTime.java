@@ -1,7 +1,7 @@
 package me.power.speed.test;
 
 public class ConsumerTime {
-	protected static boolean isPrintTime = false;
+	protected static boolean isPrintTime = true;
 	protected static boolean isMoreTime = false;
 	public interface ConsumerTimeHandle {
 		public void handle();

@@ -32,4 +32,9 @@ public class TestChronicleMapShareWithMulitProcessor extends AbstractTest {
 		ChronicleMapShareWithMulitProcessor.put(key, value);
 		this.print(ChronicleMapShareWithMulitProcessor.get(key));
 	}
+	
+	@Test
+	public void testGetValueByKey() {
+		this.print(ChronicleMapShareWithMulitProcessor.get(121));
+	}
 }

@@ -3,6 +3,7 @@ package me.power.speed.test.storage.redis;
 import java.util.List;
 import org.junit.Test;
 import com.gameanalytics.bitmap.Bitmap;
+import com.gameanalytics.bitmap.common.BitmapHandler;
 import com.gameanalytics.bitmap.impl.ConciseBitmapImpl;
 
 import me.power.speed.test.ConsumerTime;
@@ -24,6 +25,23 @@ public class TestRedisBitmap extends AbstractRedisTest {
 		});
 		this.getBitmapCount(key);
 		redisTest.print(bitmap.cardinary(), true);
+	}
+	
+	@Test
+	public void setMuliteNewBitmapBytesToRedis() {
+		this.handleWithConsumerTime(new ConsumerTimeHandle() {
+			public void handle() {
+			    long sumBytes = 0;
+				for(int i=0;i<10000;i++) {
+				    String key = "20150108:13409:9876697:"+i;
+				    Bitmap bitmap = redisTest.getRandomBitmap();
+				    byte[] datas = BitmapHandler.bitmapToByteArray(bitmap);
+				    sumBytes = sumBytes +datas.length;
+				    redisTest.setValueToRedis(key, datas);
+				}	
+				redisTest.print("sumBytes:" + sumBytes);
+			}
+		});
 	}
 	
 	@Test

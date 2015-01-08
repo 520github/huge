@@ -18,6 +18,9 @@ import me.power.speed.test.ConsumerTime.ConsumerTimeHandle;
 
 import org.junit.Assert;
 import com.alisoft.nano.bench.Nano;
+import com.gameanalytics.bitmap.Bitmap;
+import com.gameanalytics.bitmap.common.BitmapHandler;
+import com.gameanalytics.bitmap.impl.ConciseBitmapImpl;
 
 /**
  * @author keke
@@ -45,6 +48,24 @@ public abstract class AbstractTest {
 	
 	protected void runByMulitThread(int measurements, int threads, int SerialTimes,String title, Runnable runnable) {
 		Nano.bench().measurements(measurements).threads(threads).measure(title, runnable);
+	}
+	
+	protected String getTemDir() {
+		return System.getProperty("java.io.tmpdir");
+	}
+	
+	public Bitmap getRandomBitmap() {
+		Bitmap bitmap = new ConciseBitmapImpl();
+		int randoms[] = this.getRandomIntArrays(100000, 1000000);
+		List<Integer> offsets = this.getSortOffsetListByOffsetArray(randoms);
+		for(int offset : offsets) {
+			bitmap.set(offset);
+		}
+		
+		//int length = BitmapHandler.bitmapToByteArray(bitmap).length;
+		//this.print("random bitmap length:" + length);
+		
+		return bitmap;
 	}
 	
 	protected List<Integer> getSortOffsetListByOffsetArray(int offsets[]) {
@@ -83,7 +104,7 @@ public abstract class AbstractTest {
 		return offsetSets;
 	}
 
-	protected void print(Object obj) {
+	public void print(Object obj) {
 		this.print(obj, this.isPrint);
 	}
 	
@@ -317,5 +338,13 @@ public abstract class AbstractTest {
 	protected String getTimestampString() {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss SSS");
 		return df.format(new Timestamp(System.currentTimeMillis()));
+	}
+	
+	protected void sleep(long time) {
+		try {
+			Thread.sleep(time);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
