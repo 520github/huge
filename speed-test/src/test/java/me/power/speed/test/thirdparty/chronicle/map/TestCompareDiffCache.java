@@ -11,7 +11,7 @@ import me.power.speed.test.ConsumerTime;
 import me.power.speed.test.ConsumerTime.ConsumerTimeHandle;
 
 public class TestCompareDiffCache extends AbstractCacheTest {
-	private static int cycleNum = 1000;
+	private static int cycleNum = 2000;
 	String path = "C:\\xuehui\\50-temp\\90-temp\\cache\\";
 	String filePath = path+"bitmapCache"+cycleNum;
 	
@@ -25,6 +25,18 @@ public class TestCompareDiffCache extends AbstractCacheTest {
 	@Test
 	public void testSetBitmapBytesToChronicleMapByFilePath() {
 		try {
+			this.sleep(3500);
+			Map<String,Object> map = this.getChronicleMapByFilePath(path+"bitmapByteCache"+cycleNum);
+			this.setBitmapBytesValueToMap(map);
+		} catch (Exception e) {
+			this.fail(e);
+		}
+	}
+	
+	@Test
+	public void testSetBitmapBytesToChronicleMapByFilePath2() {
+		try {
+			this.sleep(5000);
 			Map<String,Object> map = this.getChronicleMapByFilePath(path+"bitmapByteCache"+cycleNum);
 			this.setBitmapBytesValueToMap(map);
 		} catch (Exception e) {
@@ -35,6 +47,7 @@ public class TestCompareDiffCache extends AbstractCacheTest {
 	@Test
 	public void testSetChronicleMapByFilePath() {
 		try {
+			this.sleep(3500);
 			Map<String,Object> map = this.getChronicleMapByFilePath(filePath);
 			//this.setIntValueToMap(map);
 			this.setBitmapValueToMap(map);
@@ -46,6 +59,18 @@ public class TestCompareDiffCache extends AbstractCacheTest {
 //				
 //			}
 //		});
+	}
+	
+	@Test
+	public void testSetChronicleMapByFilePath2() {
+		try {
+			this.sleep(5000);
+			Map<String,Object> map = this.getChronicleMapByFilePath(filePath);
+			//this.setIntValueToMap(map);
+			this.setBitmapValueToMap(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -78,6 +103,30 @@ public class TestCompareDiffCache extends AbstractCacheTest {
 		}	
 	}
 	
+	@Test
+	public void testMulitDimeChronicleMap() {
+		try {
+			String[] keys = new String[]{"12347","12347-1","12347-1-87653"};//,"12347-1","12347-1-87653","12347-2-98654","12347-98643"
+			for(String key: keys) {
+				Map<String,Object> map = this.getKeyChronicleMap(key, filePath + key);
+				this.setBitmapValueToMap(map);
+//				try {
+//					Thread thread = new Thread(new Runnable() {
+//						public void run() {
+//							System.out.println("ayou okd");
+//							cacheTest.setBitmapValueToMap(map, cycleNum);
+//						}
+//					});
+//					thread.start();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+			}
+		} catch (Exception e) {
+			this.fail(e);
+		}
+	}
+	
 	protected void setIntValueToMap(Map<String,Object> map) {
 		ConsumerTime ct = new ConsumerTime();
 		//String key = "intKey";
@@ -89,24 +138,7 @@ public class TestCompareDiffCache extends AbstractCacheTest {
 	}
 	
 	protected void setBitmapValueToMap(Map<String,Object> map) {
-		ConsumerTime ct = new ConsumerTime();
-		//String key = "intKey";
-		long sumBytes = 0;
-		try{
-			for(int i=0; i<cycleNum;i++) {
-				//Bitmap bitmap = this.getRandomBitmap();
-				map.put(String.valueOf(i), this.getRandomBitmap());
-				//sumBytes = sumBytes +BitmapHandler.bitmapToByteArray(bitmap).length;
-				//this.print(String.valueOf(i));
-				this.sleep(100);
-			}
-		}catch(Exception e){
-			this.print("sumBytes:" + sumBytes);
-			this.fail(e);
-		}
-		
-		ct.endConsumeTime();
-		this.print(map.size());
+		this.setBitmapValueToMap(map, cycleNum);
 	}
 	
 	protected void setBitmapBytesValueToMap(Map<String,Object> map) {
