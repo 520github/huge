@@ -20,6 +20,7 @@ public class RedisConnector {
 	
 	private void createSession(){
 		if(pool == null){
+			this.initParameter();
 			JedisPoolConfig config = new JedisPoolConfig();
 			config.setMaxTotal(maxActive);
 			config.setMaxIdle(maxIdle);
@@ -31,6 +32,14 @@ public class RedisConnector {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	private void initParameter() {
+		String isHome = System.getProperty("isHome");
+		if("true".equalsIgnoreCase(isHome)) {
+			host = "localhost";
+			port = 6379;
 		}
 	}
 	

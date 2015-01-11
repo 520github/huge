@@ -3,6 +3,7 @@
  */
 package me.power.speed.test;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ import me.power.speed.common.stream.file.FileUtil;
 import me.power.speed.test.ConsumerTime.ConsumerTimeHandle;
 
 import org.junit.Assert;
+
 import com.alisoft.nano.bench.Nano;
 import com.gameanalytics.bitmap.Bitmap;
 import com.gameanalytics.bitmap.common.BitmapHandler;
@@ -51,7 +53,13 @@ public abstract class AbstractTest {
 	}
 	
 	protected String getTemDir() {
-		return System.getProperty("java.io.tmpdir");
+		String tmpdir =  System.getProperty("java.io.tmpdir") + "/";
+		this.print(tmpdir);
+		return tmpdir;
+	}
+	
+	protected File getTempFile(String fileName) {
+		return new File(this.getTemDir() + fileName);
 	}
 	
 	public Bitmap getRandomBitmap() {
