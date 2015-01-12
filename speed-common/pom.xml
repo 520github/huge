@@ -343,18 +343,49 @@
 		<groupId>com.gameanalytics.bitmap</groupId>
 		<artifactId>game-bitmap-common</artifactId>
 		<version>0.0.18</version>
+		<!--  
 		<scope>system</scope>
 		<systemPath>${project.basedir}/lib/game-bitmap-common-0.0.18.jar</systemPath>
+		-->
 	</dependency>
 	
 	<dependency>
 		<groupId>com.gameanalytics.bitmap</groupId>
 		<artifactId>game-bitmap-impl</artifactId>
 		<version>0.0.18</version>
+		<!--  
 		<scope>system</scope>
 		<systemPath>${project.basedir}/lib/game-bitmap-impl-0.0.18.jar</systemPath>
+		-->
 	</dependency>
     <!-- end bitmap -->
+    
+    <!-- start memory out of heap -->
+	<dependency>
+	  <groupId>net.openhft</groupId>
+	  <artifactId>chronicle</artifactId>
+	  <version>3.3.3</version>
+	</dependency>
+	
+	<dependency>                                   
+	  <groupId>net.openhft</groupId>
+	  <artifactId>chronicle-map</artifactId>
+	  <version>2.0.22rc2</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>net.openhft</groupId>
+	    <artifactId>lang</artifactId>
+	    <version>6.4.21</version>
+	</dependency>
+	
+	<dependency>
+        <optional>true</optional>
+        <groupId>com.thoughtworks.xstream</groupId>
+        <artifactId>xstream</artifactId>
+        <version>1.4.7</version>
+    </dependency>
+	<!-- end memory out of heap -->
 	
 	<!--  
 	<dependency>
@@ -379,6 +410,24 @@
   			<artifactId>maven-compiler-plugin</artifactId>
   			<version>2.3.2</version>
   		</plugin>
+  		<plugin>
+		<artifactId>maven-assembly-plugin</artifactId>
+		<configuration>
+			<appendAssemblyId>false</appendAssemblyId>
+			<descriptorRefs>
+			<descriptorRef>jar-with-dependencies</descriptorRef>
+			</descriptorRefs>
+		</configuration>
+		<executions>
+			<execution>
+			<id>make-assembly</id>
+			<phase>package</phase>
+			<goals>
+			<goal>assembly</goal>
+			</goals>
+			</execution>
+		</executions>
+		</plugin>
   	</plugins>
   </build>
 </project>
