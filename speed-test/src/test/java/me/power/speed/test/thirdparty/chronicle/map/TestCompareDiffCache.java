@@ -11,7 +11,7 @@ import me.power.speed.test.ConsumerTime;
 import me.power.speed.test.ConsumerTime.ConsumerTimeHandle;
 
 public class TestCompareDiffCache extends AbstractCacheTest {
-	private static int cycleNum = 2000;
+	private static int cycleNum = 1000;
 	String path = "C:\\xuehui\\50-temp\\90-temp\\cache\\";
 	String filePath = path+"bitmapCache"+cycleNum;
 	
@@ -25,7 +25,7 @@ public class TestCompareDiffCache extends AbstractCacheTest {
 	@Test
 	public void testSetBitmapBytesToChronicleMapByFilePath() {
 		try {
-			this.sleep(3500);
+			//this.sleep(3500);
 			Map<String,Object> map = this.getChronicleMapByFilePath(path+"bitmapByteCache"+cycleNum);
 			this.setBitmapBytesValueToMap(map);
 		} catch (Exception e) {
@@ -47,7 +47,7 @@ public class TestCompareDiffCache extends AbstractCacheTest {
 	@Test
 	public void testSetChronicleMapByFilePath() {
 		try {
-			this.sleep(3500);
+			//this.sleep(3500);
 			Map<String,Object> map = this.getChronicleMapByFilePath(filePath);
 			//this.setIntValueToMap(map);
 			this.setBitmapValueToMap(map);
