@@ -6,9 +6,12 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import me.power.speed.storage.redis.bitmap.util.CompressBitmapUtil;
 import net.openhft.chronicle.hash.replication.ReplicationChannel;
 import net.openhft.chronicle.hash.replication.ReplicationHub;
 import net.openhft.chronicle.map.ChronicleMap;
@@ -16,6 +19,7 @@ import net.openhft.chronicle.map.ChronicleMap;
 import org.apache.commons.lang.StringUtils;
 
 import com.gameanalytics.bitmap.Bitmap;
+import com.gameanalytics.bitmap.common.BitmapHandler;
 import com.gameanalytics.bitmap.impl.ConciseBitmapImpl;
 
 public class ChronicleMapTest {
@@ -27,28 +31,55 @@ public class ChronicleMapTest {
 	private static String channelIdsArrays[];
 	private static String valueType ;
 	private static int cacheSize = 0;
-	private static int overIncreamentCount = 0;
+	private static int offsetNum = 0;
+	private static int sleepTime = 0;
+	private static int syncTotalNum = 0;
+	private static String bitmapFileName = "";
 	private static Map<String,ChronicleMap<String, Object>> cacheMap = new HashMap<String, ChronicleMap<String,Object>>();
+	private static Map<String,Integer> okKeysSize = new HashMap<String, Integer>();
 	
 	public static void main(String[] args) {
 		try {
 			print("handle start...");
+			long startTime = System.currentTimeMillis();
 			//System.setProperty("remoteAddr", "10.10.32.104:1024");
+//			System.setProperty("sleepTime", "0");
+//			System.setProperty("bitmapFileName", "C:\\xuehui\\50-temp\\10-datafilter-data\\20-thread\\a.bitmap");
+//			System.setProperty("channelIds", "1");
+//			System.setProperty("fileNames", "fn999");
+//			System.setProperty("cacheSize", "1");
 			
 			initProperty();
 			initChronicleMap();
 			operateAndSyncCache();
 			
+			Set<String> okKeys = new HashSet<String>();
 			while(true) {
 				printCacheSize();
-				Thread.sleep(1000);
-				if(overIncreamentCount >= cacheSize) {
-					printCacheData();
+				Thread.sleep(2000);
+				for(String key: cacheMap.keySet()) {
+					ChronicleMap<String, Object> map = cacheMap.get(key);
+					if(map.size() >= okKeysSize.get(key) && !okKeys.contains(key)) {
+						okKeys.add(key);
+						long endTime = System.currentTimeMillis();
+						long diffTime = endTime - startTime;
+						print("key->"+key+" consume time->ms->" + diffTime + ",s->" + diffTime/1000+ ",m->"+diffTime/1000/60);
+						print("key->"+key+"mapSize->" + map.size()+ ",syncTotalNum->" + syncTotalNum);
+					}
+				}
+				
+				if(okKeys.size() == channelIdsArrays.length) {
+					print("all channelId is sync ok.");
 					printCacheSize();
-					break;
+					printCacheData();
+					Thread.sleep(30000);
+				}
+				else {
+					printCacheSize();
+					printCacheData();
 				}
 			}
-			print("handle finish...");
+			//print("handle finish...");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,7 +117,7 @@ public class ChronicleMapTest {
 		print("channelIds->" + channelIds);
 		channelIdsArrays = channelIds.split(",");
 		
-		fileNames = System.getProperty("fileNames", "fn1,fn2,fn3");//fn1,fn2,fn3
+		fileNames = System.getProperty("fileNames", "");//fn1,fn2,fn3
 		print("fileName->" + fileNames);
 		
 		try {
@@ -95,6 +126,29 @@ public class ChronicleMapTest {
 		} catch (Exception e) {
 			print("cacheSize parameter invalid " + System.getProperty("cacheSize"));
 		}
+		
+		try {
+			offsetNum = Integer.parseInt(System.getProperty("offsetNum", "1000"));
+			print("offsetNum->" + offsetNum);
+		} catch (Exception e) {
+			print("offsetNum parameter invalid " + System.getProperty("offsetNum"));
+		}
+		
+		try {
+			sleepTime = Integer.parseInt(System.getProperty("sleepTime", "1000"));
+			print("sleepTime->" + sleepTime);
+		} catch (Exception e) {
+			print("sleepTime parameter invalid " + System.getProperty("sleepTime"));
+		}
+		
+		try {
+			syncTotalNum = Integer.parseInt(System.getProperty("syncTotalNum", cacheSize+""));
+			print("syncTotalNum->" + syncTotalNum);
+		} catch (Exception e) {
+			print("syncTotalNum parameter invalid " + System.getProperty("syncTotalNum"));
+		}
+		
+		bitmapFileName = System.getProperty("bitmapFileName");
 	}
 	
 	private static InetSocketAddress[] getInetSocketAddress() {
@@ -117,6 +171,7 @@ public class ChronicleMapTest {
 		ReplicationHub repHub = ChronicleMapUtil.getReplicationHub(ChronicleMapUtil.getTcpConfig(port, getInetSocketAddress()), identifier);
 		for(int i=0;i<channelIdsArrays.length;i++) {
 			String channelId = channelIdsArrays[i];
+			okKeysSize.put(channelId, syncTotalNum);
 			ReplicationChannel repChannel = ChronicleMapUtil.getReplicationChannel(repHub, Short.parseShort(channelId));
 			
 			ChronicleMap<String, Object> map = null;
@@ -135,6 +190,7 @@ public class ChronicleMapTest {
 	private static String getTemDir() {
 		String tmpdir =  System.getProperty("java.io.tmpdir") + "/";
 		print(tmpdir);
+		//tmpdir = "C:\\xuehui\\50-temp\\10-datafilter-data\\20-thread\\";
 		return tmpdir;
 	}
 	
@@ -150,10 +206,14 @@ public class ChronicleMapTest {
 				public void run() {
 					ChronicleMap<String, Object> map = cacheMap.get(finChannel);
 					for(int i=0; i< cacheSize; i++) {
+						String key = String.valueOf(port) + ":"+String.valueOf(identifier)+":"+finChannel+":"+String.valueOf(i);
 						try {
-							map.put(String.valueOf(identifier)+":"+finChannel+":"+String.valueOf(i), ChronicleMapTest.getValue(finChannel, i));
-							Thread.sleep(50);
+							map.put(key, ChronicleMapTest.getValue(finChannel, i));
+							Thread.sleep(sleepTime);
 						} catch (Exception e) {
+							int size = okKeysSize.get(finChannel)-1;
+							okKeysSize.put(finChannel, size);
+							System.out.println("error put key ->" +key);
 							e.printStackTrace();
 						}
 						
@@ -164,7 +224,7 @@ public class ChronicleMapTest {
 		}
 	}
 	
-	private static Object getValue(String channel, int index) {
+	private static Object getValue(String channel, int index) throws IOException {
 		if("bitmap".equalsIgnoreCase(valueType)) {
 			return getBitmapValue(channel, index);
 		}
@@ -176,17 +236,30 @@ public class ChronicleMapTest {
 		}
 	}
 	
-	private static Bitmap getBitmapValue(String channel, int index) {
+	private static Bitmap getBitmapValue(String channel, int index) throws IOException {
+		if(StringUtils.isNotBlank(bitmapFileName)) {
+			return getBigBitmap();
+		}
 		return getRandomBitmap();
+	}
+	
+	protected static Bitmap getBigBitmap() throws IOException {
+		String FileName = bitmapFileName;
+		if(FileName.indexOf("/") ==-1 && FileName.indexOf("\\") ==-1) {
+			FileName = getTemDir() + bitmapFileName;
+		}
+		return CompressBitmapUtil.getBitmapFromFileName(FileName);
 	}
 	
 	protected static Bitmap getRandomBitmap() {
 		Bitmap bitmap = new ConciseBitmapImpl();
-		int randoms[] = getRandomIntArrays(100000, 1000000);
+		int randoms[] = getRandomIntArrays(offsetNum, 100000);
 		List<Integer> offsets = getSortOffsetListByOffsetArray(randoms);
 		for(int offset : offsets) {
 			bitmap.set(offset);
 		}
+		int length = BitmapHandler.bitmapToByteArray(bitmap).length;
+		print("bitmap length ->" + length);
 		return bitmap;
 	}
 	
@@ -232,9 +305,6 @@ public class ChronicleMapTest {
 		for(String key: cacheMap.keySet()) {
 			ChronicleMap<String, Object> map = cacheMap.get(key);
 			print("size:" + key + "-->" + map.size());
-			if(map.size() >= cacheSize) {
-				overIncreamentCount++;
-			}
 		}
 	}
 	

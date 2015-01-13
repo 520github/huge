@@ -92,6 +92,8 @@ public class TestCompareDiffCache extends AbstractCacheTest {
 	@Test
 	public void testGetBitmapFromChronicleMap() {
 		try {
+			filePath = path + "fn1";
+			filePath = "C:\\xuehui\\50-temp\\10-datafilter-data\\20-thread\\fn999";
 			Map<String,Object> map = this.getChronicleMapByFilePath(filePath);
 			this.print(map.size());
 			for(String key : map.keySet()) {

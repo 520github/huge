@@ -188,7 +188,7 @@
 	<dependency>
 	  <groupId>net.openhft</groupId>
 	  <artifactId>chronicle</artifactId>
-	  <version>3.3.3</version>
+	  <version>3.3.4</version>
 	</dependency>
 	
 	<dependency>                                   
@@ -202,6 +202,12 @@
 	    <artifactId>lang</artifactId>
 	    <version>6.4.21</version>
 	</dependency>
+	
+	<dependency>
+        <groupId>com.thoughtworks.xstream</groupId>
+        <artifactId>xstream</artifactId>
+        <version>1.4.7</version>
+    </dependency>
 	<!-- end memory out of heap -->
   	
   </dependencies>

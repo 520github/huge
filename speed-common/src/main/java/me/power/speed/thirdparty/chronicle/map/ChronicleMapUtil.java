@@ -12,7 +12,7 @@ import net.openhft.chronicle.map.ChronicleMap;
 import net.openhft.chronicle.map.ChronicleMapBuilder;
 
 public class ChronicleMapUtil {
-	public static int entriesSize = 1900009;
+	public static int entriesSize = 2900009;
 	
 	private static ChronicleMapBuilder<String, Object> builder =
             ChronicleMapBuilder.of(String.class, Object.class).entries(entriesSize);
