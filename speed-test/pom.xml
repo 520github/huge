@@ -185,10 +185,29 @@
 	<!-- end test frame -->
 	
 	<!-- start memory out of heap -->
+	
 	<dependency>
 	  <groupId>net.openhft</groupId>
 	  <artifactId>chronicle</artifactId>
-	  <version>3.3.4</version>
+	  <version>3.3.3</version>
+	</dependency>
+	
+	<dependency>                                   
+	  <groupId>net.openhft</groupId>
+	  <artifactId>chronicle-map</artifactId>
+	  <version>2.0.20b</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>net.openhft</groupId>
+	    <artifactId>lang</artifactId>
+	    <version>6.4.21</version>
+	</dependency>
+	<!--  
+	<dependency>
+	  <groupId>net.openhft</groupId>
+	  <artifactId>chronicle</artifactId>
+	  <version>3.3.3</version>
 	</dependency>
 	
 	<dependency>                                   
@@ -203,11 +222,14 @@
 	    <version>6.4.21</version>
 	</dependency>
 	
+	
 	<dependency>
+	    <optional>true</optional>
         <groupId>com.thoughtworks.xstream</groupId>
         <artifactId>xstream</artifactId>
         <version>1.4.7</version>
     </dependency>
+    -->
 	<!-- end memory out of heap -->
   	
   </dependencies>

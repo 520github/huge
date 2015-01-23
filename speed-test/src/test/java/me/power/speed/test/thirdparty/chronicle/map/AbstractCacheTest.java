@@ -5,11 +5,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 import com.gameanalytics.bitmap.Bitmap;
 
 import me.power.speed.test.AbstractTest;
 import me.power.speed.test.ConsumerTime;
+import net.openhft.chronicle.map.ChronicleMap;
 import net.openhft.chronicle.map.ChronicleMapBuilder;
 
 public class AbstractCacheTest extends AbstractTest {
@@ -18,6 +21,10 @@ public class AbstractCacheTest extends AbstractTest {
 	
 	protected Map<String,Object> getHashMap() {
 		return new HashMap<String, Object>();
+	}
+	
+	protected Set<Integer> getNewSet() {
+		return new ConcurrentSkipListSet<Integer>();
 	}
 	
 	protected Map<String,Object> getKeyChronicleMap(String key, String filePath) throws IOException {
@@ -34,6 +41,25 @@ public class AbstractCacheTest extends AbstractTest {
 		File file = new File(filePath);
 		return ChronicleMapBuilder.of(String.class, Object.class)
 				.entries(1900009)
+				//.create();
+				//.constantKeySizeBySample("1000000")
+				//.constantValueSizeBySample(this.getRandomBitmap())//"1000000"
+				.createPersistedTo(file);
+	}
+	
+	protected Map<String,Set> getSetChronicleMapByFilePath(String filePath) throws IOException {
+		File file = new File(filePath);
+		return ChronicleMapBuilder.of(String.class, Set.class)
+				.entries(1900009)
+				//.constantKeySizeBySample("1000000")
+				//.constantValueSizeBySample(this.getRandomBitmap())//"1000000"
+				.createPersistedTo(file);
+	}
+	
+	protected ChronicleMap<String,Set> getSetChronicleMapSourceByFilePath(String filePath) throws IOException {
+		File file = new File(filePath);
+		return ChronicleMapBuilder.of(String.class, Set.class)
+				.entries(2900009)
 				//.constantKeySizeBySample("1000000")
 				//.constantValueSizeBySample(this.getRandomBitmap())//"1000000"
 				.createPersistedTo(file);
@@ -58,7 +84,7 @@ public class AbstractCacheTest extends AbstractTest {
 				map.put(String.valueOf(i), this.getRandomBitmap());
 				//sumBytes = sumBytes +BitmapHandler.bitmapToByteArray(bitmap).length;
 				this.print(String.valueOf(i));
-				this.sleep(5);
+				//this.sleep(5);
 			}
 		}catch(Exception e){
 			this.print("sumBytes:" + sumBytes);
@@ -66,7 +92,26 @@ public class AbstractCacheTest extends AbstractTest {
 		}
 		
 		ct.endConsumeTime();
-		this.print(map.size());
+		this.print("map size -->" + map.size());
+	}
+	
+	protected void setStringValueToMap(Map<String,Object> map, int cycleNum) {
+		ConsumerTime ct = new ConsumerTime();
+		//String key = "intKey";
+		long sumBytes = 0;
+		try{
+			for(int i=0; i<cycleNum;i++) {
+				map.put(String.valueOf(i), String.valueOf(i));
+				this.print(String.valueOf(i));
+				//this.sleep(5);
+			}
+		}catch(Exception e){
+			this.print("sumBytes:" + sumBytes);
+			this.fail(e);
+		}
+		
+		ct.endConsumeTime();
+		this.print("map size -->" + map.size());
 	}
 	
 }

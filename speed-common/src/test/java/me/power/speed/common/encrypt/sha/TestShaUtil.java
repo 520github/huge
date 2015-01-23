@@ -6,8 +6,8 @@ import me.power.speed.AbstractBaseTest;
 import me.power.speed.common.encrypt.base64.Base64Util;
 
 public class TestShaUtil extends AbstractBaseTest {
-	private String content = "{\"user_id\":\"eu545dfhd\",\"user_name\":\"Jingxi Zhang\",\"user_name\":\"111@126.com\"}";
-	private String clientKey = "1234";
+	private String content = "{\"user_id\":\"xiaoweitest\",\"user_name\":\"Jingxi Zhang\",\"user_email\":\"this is email\",\"phone\":\"this is phone\",\"company\":\"this is company\"}";
+	private String clientKey = "4244d67b796f754f692d4e3d4aa906b6";
 	
 	@Test
 	public void testSha() {
