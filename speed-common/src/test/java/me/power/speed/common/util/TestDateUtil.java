@@ -66,4 +66,27 @@ sdf.format(new Date());
 			this.fail(e);
 		}
 	}
+	
+	@Test
+	public void testDiffDay() {
+		long day_mills = 1000*60*60*24;
+		int day_mills_int = 1000*60*60*24;;
+		long ct = System.currentTimeMillis();
+		long bt = System.currentTimeMillis() - (day_mills*170);
+		
+		long diff = ct - bt;
+		System.out.println("diff-->" + diff);
+		//System.out.println("" + );
+		int day = (int)(diff/day_mills);
+		System.out.println("day-->" + day);
+		if(diff/day_mills >=180) {
+			System.out.println("is more than 180 by " + diff/day_mills);
+		}
+		else {
+			System.out.println("is less than 180 by " + diff/day_mills);
+		}
+		
+		System.out.println("longValue:" + (day_mills*200));
+		System.out.println("intValue:" + (day_mills_int*200));
+	}
 }

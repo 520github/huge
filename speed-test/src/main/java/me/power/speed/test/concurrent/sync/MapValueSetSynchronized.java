@@ -10,9 +10,18 @@ public class MapValueSetSynchronized extends AbstractMapValueSynchronized {
 	
 	public static void putValue(String key, String offset) {
 		if(!map.containsKey(key)) {
-			Set<String> set = new ConcurrentSkipListSet<String>();
-			set.add(offset);
-			map.put(key, set);
+			synchronized (key) {
+				System.out.println(""  + Thread.currentThread().getName() + "-->key " + key + " into to synchronized");
+				if(map.containsKey(key)) {
+					System.out.println(""  + Thread.currentThread().getName() + "-->key-->" + key + " is contains.....");
+					map.get(key).add(offset);
+					return;
+				}
+				
+				Set<String> set = new ConcurrentSkipListSet<String>();
+				set.add(offset);
+				map.put(key, set);
+			}
 		}
 		
 		Set<String> set = map.get(key);
@@ -20,15 +29,19 @@ public class MapValueSetSynchronized extends AbstractMapValueSynchronized {
 			System.out.println("add offset-->" + offset);
 			set.add(offset);
 		}
-		sleep(1);
+		//sleep(1);
 	}
 	
 	public static void getAndClear(String key) {
 		Set<String> set = map.get(key);
 		synchronized (set) {
 			printSet(set);
+			Set<String> temp = new ConcurrentSkipListSet<String>(set);
 			set.clear();
+			System.out.println("come from map............");
 			printSet(map.get(key));
+			System.out.println("come from temp...........");
+			printSet(temp);
 			sleep(30000);
 		}
 	}
@@ -46,7 +59,8 @@ public class MapValueSetSynchronized extends AbstractMapValueSynchronized {
 	
 	protected static void testPutAndGetAndClearByThread() {
 		final String key = "12307";
-		addValueByThread(key, 1, 200);
+		addValueByThread(key, 1, 200000);
+		//addValueByThread("12221", 200000, 300000);
 		sleep(30);
 		Thread td1 = new Thread(new Runnable() {
 			public void run() {
@@ -56,7 +70,15 @@ public class MapValueSetSynchronized extends AbstractMapValueSynchronized {
 		td1.start();
 	}
 	
+	protected static void testPutByThread() {
+		String key = "12307";
+		addValueByThread("12307", 1, 2000);
+		addValueByThread(key, 2000, 3000);
+		addValueByThread("12307", 3000, 4000);
+	}
+	
 	public static void main(String[] args) {
-		testPutAndGetAndClearByThread();
+		//testPutAndGetAndClearByThread();
+		testPutByThread();
 	}
 }
