@@ -47,12 +47,10 @@ public class FileUtil {
 	public static List<String> readLineDataFromFile(String filePath, int cacheMSize) throws Exception {
 		final List<String> resultList = new ArrayList<String>();
 		readLineDataFromFile(filePath, 0, new FileHandleAndFilter() {
-			@Override
 			public void handleOneLineData(String data) {
 				resultList.add(data);
 			}
 			
-			@Override
 			public boolean filterOneLineData(String data) {
 				return false;
 			}

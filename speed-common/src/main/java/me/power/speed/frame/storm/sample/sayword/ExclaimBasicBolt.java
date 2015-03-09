@@ -21,7 +21,7 @@ public class ExclaimBasicBolt extends BaseBasicBolt {
 	/* (non-Javadoc)
 	 * @see backtype.storm.topology.IBasicBolt#execute(backtype.storm.tuple.Tuple, backtype.storm.topology.BasicOutputCollector)
 	 */
-	@Override
+	
 	public void execute(Tuple tuple, BasicOutputCollector collector) {
 		String sentence = (String) tuple.getValue(0);
 		String out = sentence + "!";
@@ -31,7 +31,7 @@ public class ExclaimBasicBolt extends BaseBasicBolt {
 	/* (non-Javadoc)
 	 * @see backtype.storm.topology.IComponent#declareOutputFields(backtype.storm.topology.OutputFieldsDeclarer)
 	 */
-	@Override
+	
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		declarer.declare(new Fields("excl_sentence"));
 	}

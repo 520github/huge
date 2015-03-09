@@ -42,12 +42,10 @@ public class TestParseRequestHeaderResult extends AbstractBaseTest {
 		try {
 			ConsumerTime ct = new ConsumerTime();
 			FileUtil.readLineDataFromFile(filePath, 50, new FileHandleAndFilter() {
-				@Override
 				public void handleOneLineData(String data) {
 					handleOneData(data);
 				}
 				
-				@Override
 				public boolean filterOneLineData(String data) {
 					return false;
 				}

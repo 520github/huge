@@ -35,6 +35,10 @@
 	    </iterate > 
 	    
 	</insert>
+	
+	<select id="selectUserByEmail" parameterClass="user" resultClass="user">
+	    select * from user where email= #email#
+	</select>
 
 
 </sqlMap>

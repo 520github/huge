@@ -29,12 +29,10 @@ public class TestFileUtil extends AbstractBaseTest {
 	public void testCustomeReadLineDataFromFile() {
 		try {
 			FileUtil.readLineDataFromFile(filePath, new FileHandleAndFilter() {
-				@Override
 				public void handleOneLineData(String data) {
 					System.out.println(data);
 				}
 				
-				@Override
 				public boolean filterOneLineData(String data) {
 					return false;
 				}

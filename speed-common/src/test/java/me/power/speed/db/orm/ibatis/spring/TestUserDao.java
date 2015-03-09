@@ -110,6 +110,21 @@ public class TestUserDao extends AbstractTest {
 		}
 	}
 	
+	@Test
+	public void testGetUserByEmail() {
+		try {
+			User user = new User();
+			user.setEmail("'email' or 1=1;");//delete from user where email='email_0';
+			user = userDao.getUserByEmail(user);
+			if(user == null) {
+				System.out.println("the resut user is empty");
+			}
+			this.print(user);
+		} catch (Exception e) {
+			this.fail(e);
+		}
+	}
+	
 	protected List<User> getUserList(int index, int limit) {
 		List<User> userList = new ArrayList<User>();
 		for(int i=0; i<limit; i++) {

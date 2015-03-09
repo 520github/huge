@@ -47,6 +47,10 @@ ENGINE=InnoDB;
 	    </iterate > 
 	    
 	</insert>
+	
+	<statement id="selectUserByEmail" parameterClass="user" resultClass="user">
+	    select * from user where email= $email$
+	</statement>
 
 
 </sqlMap>

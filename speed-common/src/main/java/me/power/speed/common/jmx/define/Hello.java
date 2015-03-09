@@ -17,7 +17,6 @@ public class Hello implements HelloMBean {
 	/* (non-Javadoc)
 	 * @see me.power.speed.common.jmx.define.HelloMBean#sayHello()
 	 */
-	@Override
 	public void sayHello() {
 		System.out.println("hello, world");
 	}
@@ -25,7 +24,6 @@ public class Hello implements HelloMBean {
 	/* (non-Javadoc)
 	 * @see me.power.speed.common.jmx.define.HelloMBean#add(int, int)
 	 */
-	@Override
 	public int add(int x, int y) {
 		return x + y;
 	}
@@ -33,7 +31,6 @@ public class Hello implements HelloMBean {
 	/* (non-Javadoc)
 	 * @see me.power.speed.common.jmx.define.HelloMBean#getName()
 	 */
-	@Override
 	public String getName() {
 		return this.name;
 	}
@@ -41,7 +38,6 @@ public class Hello implements HelloMBean {
 	/* (non-Javadoc)
 	 * @see me.power.speed.common.jmx.define.HelloMBean#getCacheSize()
 	 */
-	@Override
 	public int getCacheSize() {
 		return this.cacheSize;
 	}
@@ -49,7 +45,6 @@ public class Hello implements HelloMBean {
 	/* (non-Javadoc)
 	 * @see me.power.speed.common.jmx.define.HelloMBean#setCacheSize(int)
 	 */
-	@Override
 	public void setCacheSize(int size) {
 		this.cacheSize = size;   
         System.out.println("Cache size now " + this.cacheSize);

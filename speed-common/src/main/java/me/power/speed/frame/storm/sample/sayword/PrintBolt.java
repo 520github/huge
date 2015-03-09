@@ -27,7 +27,7 @@ public class PrintBolt extends BaseBasicBolt {
 	/* (non-Javadoc)
 	 * @see backtype.storm.topology.IBasicBolt#execute(backtype.storm.tuple.Tuple, backtype.storm.topology.BasicOutputCollector)
 	 */
-	@Override
+	
 	public void execute(Tuple tuple, BasicOutputCollector collector) {
 		String rec = tuple.getString(0);
 		System.err.println(String.format("Bolt[%d] String recieved: %s", this.indexId, rec));
@@ -36,7 +36,7 @@ public class PrintBolt extends BaseBasicBolt {
 	/* (non-Javadoc)
 	 * @see backtype.storm.topology.IComponent#declareOutputFields(backtype.storm.topology.OutputFieldsDeclarer)
 	 */
-	@Override
+	
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		
 	}

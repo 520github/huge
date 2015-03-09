@@ -202,7 +202,7 @@ public class ChronicleMapTest {
 		for(String channel: channelIdsArrays) {
 			final String finChannel = channel;
 			Thread thread = new Thread(new Runnable() {
-				@Override
+				
 				public void run() {
 					ChronicleMap<String, Object> map = cacheMap.get(finChannel);
 					for(int i=0; i< cacheSize; i++) {

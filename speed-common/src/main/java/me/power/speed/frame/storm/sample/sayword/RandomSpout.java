@@ -30,7 +30,7 @@ public class RandomSpout extends BaseRichSpout {
 	/* (non-Javadoc)
 	 * @see backtype.storm.spout.ISpout#open(java.util.Map, backtype.storm.task.TopologyContext, backtype.storm.spout.SpoutOutputCollector)
 	 */
-	@Override
+	
 	public void open(Map conf, TopologyContext context,
 			SpoutOutputCollector collector) {
 		this.collector = collector;
@@ -40,7 +40,7 @@ public class RandomSpout extends BaseRichSpout {
 	/* (non-Javadoc)
 	 * @see backtype.storm.spout.ISpout#nextTuple()
 	 */
-	@Override
+	
 	public void nextTuple() {
 		String toSay = sentences[rand.nextInt(sentences.length)];
 		this.collector.emit(new Values(toSay));
@@ -49,7 +49,7 @@ public class RandomSpout extends BaseRichSpout {
 	/* (non-Javadoc)
 	 * @see backtype.storm.topology.IComponent#declareOutputFields(backtype.storm.topology.OutputFieldsDeclarer)
 	 */
-	@Override
+	
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		declarer.declare(new Fields("sentence"));
 	}

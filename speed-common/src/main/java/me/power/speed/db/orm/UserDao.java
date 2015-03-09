@@ -11,4 +11,6 @@ public interface UserDao {
 	public void batchInsertUser(List<User> userList);
 	
 	public void batchInsertUserByIbatisSql(List<User> userList);
+	
+	public User getUserByEmail(User user);
 }

@@ -9,7 +9,6 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 public class SpringContext implements ApplicationContextAware {
 	private static ApplicationContext context = null;
 	
-	@Override
 	public void setApplicationContext(ApplicationContext ac)
 			throws BeansException {
 		context = ac;

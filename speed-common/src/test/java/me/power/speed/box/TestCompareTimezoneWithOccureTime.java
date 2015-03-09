@@ -37,11 +37,9 @@ public class TestCompareTimezoneWithOccureTime extends AbstractBaseTest {
 	public void testCompareTimezoneWithOccureTime() {
 		try {
 			FileUtil.readLineDataFromFile(filePath, 1, new FileHandleAndFilter() {
-				@Override
 				public void handleOneLineData(String data) {
 					handleOneData(data);
 				}
-				@Override
 				public boolean filterOneLineData(String data) {
 					if(StringUtils.isBlank(data)) {
 						return true;

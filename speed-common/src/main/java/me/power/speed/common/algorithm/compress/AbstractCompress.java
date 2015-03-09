@@ -17,7 +17,6 @@ public abstract class AbstractCompress implements Compress {
 	/* (non-Javadoc)
 	 * @see me.power.speed.common.algorithm.compress.Compress#compressString(java.lang.String)
 	 */
-	@Override
 	public byte[] compressString(String content) throws CompressException {
 		// TODO Auto-generated method stub
 		return null;

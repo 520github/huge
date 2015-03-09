@@ -24,7 +24,7 @@ public class SplitSentence implements IBasicBolt {
 	/* (non-Javadoc)
 	 * @see backtype.storm.topology.IComponent#declareOutputFields(backtype.storm.topology.OutputFieldsDeclarer)
 	 */
-	@Override
+	
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		declarer.declare(new Fields("word"));
 	}
@@ -32,7 +32,7 @@ public class SplitSentence implements IBasicBolt {
 	/* (non-Javadoc)
 	 * @see backtype.storm.topology.IBasicBolt#prepare(java.util.Map, backtype.storm.task.TopologyContext)
 	 */
-	@Override
+	
 	public void prepare(Map stormConf, TopologyContext context) {
 		
 	}
@@ -40,7 +40,7 @@ public class SplitSentence implements IBasicBolt {
 	/* (non-Javadoc)
 	 * @see backtype.storm.topology.IBasicBolt#execute(backtype.storm.tuple.Tuple, backtype.storm.topology.BasicOutputCollector)
 	 */
-	@Override
+	
 	public void execute(Tuple tuple, BasicOutputCollector collector) {
 		String sentence = tuple.getString(0); 
         for(String word: sentence.split(" ")) { 
@@ -51,12 +51,12 @@ public class SplitSentence implements IBasicBolt {
 	/* (non-Javadoc)
 	 * @see backtype.storm.topology.IBasicBolt#cleanup()
 	 */
-	@Override
+	
 	public void cleanup() {
 		
 	}
 
-	@Override
+	
 	public Map<String, Object> getComponentConfiguration() {
 		// TODO Auto-generated method stub
 		return null;

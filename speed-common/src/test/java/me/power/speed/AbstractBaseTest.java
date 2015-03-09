@@ -81,7 +81,7 @@ public class AbstractBaseTest {
 			}
 			
 			String json = JacksonJsonUtil.convertObject2Json(obj);
-			System.out.println(json);
+			System.out.println("object:" + json);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(obj.toString());
