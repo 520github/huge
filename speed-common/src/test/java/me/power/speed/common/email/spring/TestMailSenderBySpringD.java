@@ -21,7 +21,7 @@ import me.power.speed.common.email.EmailModel;
  *
  */
 //http://gundumw100.iteye.com/blog/515346
-public class TestMailSenderBySpring extends AbstractTest {
+public class TestMailSenderBySpringD extends AbstractTest {
 	//@Qualifier(name="mailSenderBySpring")
 	@Resource(name = "mailSenderBySpring")
 	private MailSenderBySpring mailSender;

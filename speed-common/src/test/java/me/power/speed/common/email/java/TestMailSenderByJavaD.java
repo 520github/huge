@@ -13,7 +13,7 @@ import me.power.speed.common.email.EmailModel;
  * @author xuehui.miao
  *
  */
-public class TestMailSenderByJava extends AbstractBaseTest {
+public class TestMailSenderByJavaD extends AbstractBaseTest {
 	private EmailModel emailModel;
 	private MailSenderByJava mailSender;
 	
@@ -21,7 +21,7 @@ public class TestMailSenderByJava extends AbstractBaseTest {
 	public void before() {
 		String host = "";
 		host = "";
-		String user = "liuyuan";
+		String user = "";
 		String password = "";
 		String from = "";
 		String to = "";
