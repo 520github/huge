@@ -19,12 +19,12 @@ public class TestMailSenderByJava extends AbstractBaseTest {
 	
 	@Before
 	public void before() {
-		String host = "smtp.126.com";
-		host = "smtp.ist.com.cn";
+		String host = "";
+		host = "";
 		String user = "liuyuan";
-		String password = "maomao0425";
-		String from = "mxh444@126.com";
-		String to = "xuehui.miao@tendcloud.com";
+		String password = "";
+		String from = "";
+		String to = "";
 		String subject ="this is test";
 		String content= "template/template.vm";
 		

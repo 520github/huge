@@ -31,8 +31,8 @@ public class TestMailSenderBySpring extends AbstractTest {
 	
 	@Before
 	public void before() {
-		String from = "mxh444@126.com";
-		String to = "xuehui.miao@tendcloud.com";
+		String from = "";
+		String to = "";
 		String subject ="this is test";
 		String template= "template/template.vm";
 		emailModel = new EmailModel.Bulider().from(from).to(to).subject(subject).template(template).build();
