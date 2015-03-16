@@ -7,6 +7,8 @@ public abstract class AbstractCallableAndFuture {
 	protected static Callable<Integer> getCallable() {
 		Callable<Integer> callable = new Callable<Integer>() {	
 			public Integer call() throws Exception {
+				Thread.sleep(20000);
+				System.out.println("after sleep go......");
 				return new Random().nextInt(1000);
 			}
 		};
