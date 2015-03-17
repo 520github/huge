@@ -360,6 +360,12 @@
 	</dependency>
     <!-- end bitmap -->
     
+    <dependency>
+		<groupId>com.alibaba.rocketmq</groupId>
+		<artifactId>rocketmq-client</artifactId>
+		<version>3.2.5</version>
+	</dependency>
+    
     <!-- start memory out of heap -->
     <dependency>
 	  <groupId>net.openhft</groupId>
